@@ -1,9 +1,10 @@
 const express = require('express');
 
+// controllers
+const blogController = require('../controllers/blog');
+
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-    res.json({ time: Date().toString() });
-});
+router.get('/', blogController.time);
 
 module.exports = router;
