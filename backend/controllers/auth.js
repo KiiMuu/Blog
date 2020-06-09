@@ -75,3 +75,15 @@ exports.signin = (req, res, next) => {
         });
     });
 }
+
+exports.signout = (req, res, next) => {
+    res.clearCookie('token');
+    res.json({
+        message: 'Signout success'
+    });
+}
+
+// protect routes
+exports.requireSignIn = expressJwt({
+    secret: process.env.JWT_SECRET
+});
