@@ -1,0 +1,25 @@
+@import '../../helpers/Variables';
+@import '../../helpers/Mixins';
+
+.header {
+    background: $mainColor;
+    .logo {
+        color: $lightColor;
+        font-size: 18px;
+    }
+    .navLink {
+        @include linkHoverEffect;
+        a {
+            color: $lightColor;
+            &:hover, &:active, &:focus {
+                color: $lightColor;
+            }
+        }
+    }
+    // menu button
+    .menuBtn {
+        background: transparent;
+        color: $lightColor;
+        @include linkHoverEffect;
+    }
+}

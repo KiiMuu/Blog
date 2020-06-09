@@ -1,0 +1,17 @@
+// Link hover effect
+@mixin linkHoverEffect {
+    &::after {
+        content: '';
+        display: block;
+        background: $lightColor;
+        height: 3px;
+        margin: 0 auto;
+        transform: translate(45px, 0px);
+        opacity: 0;
+        transition: .2s ease-in-out;
+    }
+    &:hover::after {
+        transform: translate(0px, 0px);
+        opacity: 1;
+    }
+}
