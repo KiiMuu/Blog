@@ -6,7 +6,7 @@ const authController = require('../controllers/auth');
 
 // validators
 const { runValidation } = require('../validators/index');
-const { userSignUpValidator } = require('../validators/auth');
+const { userSignUpValidator, userSignInValidator } = require('../validators/auth');
 
 // endpoints
 router.post(
@@ -14,6 +14,12 @@ router.post(
     userSignUpValidator,
     runValidation, 
     authController.signup
+);
+router.post(
+    '/signin', 
+    userSignInValidator,
+    runValidation, 
+    authController.signin
 );
 
 module.exports = router;
