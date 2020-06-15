@@ -1,0 +1,92 @@
+@import '../../helpers/Variables';
+
+.signup {
+    .uk-container-small {
+        max-width: 400px;
+    }
+    .signup-form {
+        margin-top: 50px;
+        padding: 30px;
+        border-radius: 5px;
+        box-shadow: 0 0 40px 10px rgba(0, 0, 0, 0.08);
+        .form-heading {
+            h2 {
+                margin: 0;
+                color: $mainColor;
+                font-weight: 900;
+                letter-spacing: 3px;
+            }
+            p {
+                margin: 5px 0 0 0;
+            }
+        }
+        .inputs {
+            .input {
+                position: relative;
+                label {
+                    position: relative;
+                    left: -40px;
+                    opacity: 0;
+                    color: $mainColor;
+                    font-weight: 600;
+                }
+                input {
+                    width: 100%;
+                    padding-left: 35px;
+                    margin-top: 2px;
+                    height: 50px;
+                    border-radius: 2px;
+                    border-color: #dddfdf;
+                    transition: all 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0s;
+                    &:focus {
+                        border-color: #80bdff;
+                        box-shadow: 0 0 0 0.2rem rgba(2, 135, 207, .3);
+                        outline: none;
+                    }
+                }
+                span {
+                    position: absolute;
+                    left: 25px;
+                    top: 40px;
+                    color: $mainColor;
+                }
+            }
+            .uk-grid-margin {
+                margin-top: 0;
+            }
+
+            .signup-control {
+                margin-top: 25px;
+                .signup-btn {
+                    button {
+                        text-transform: uppercase;
+                        border: none;
+                        background: $mainColor;
+                        cursor: pointer;
+                        width: 100px;
+                        height: 30px;
+                        color: $lightColor;
+                        outline: none;
+                    }
+                }
+                .signin-btn {
+                    a {
+                        text-decoration: none;
+                        text-transform: uppercase;
+                        color: $mainColor;
+                    }
+                    span {
+                        color: $mainColor;
+                        margin-left: -15px;
+                        opacity: 0;
+                        transition: .2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+                    }
+                    a:hover + span{
+                        margin-left: 5px;
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+}
