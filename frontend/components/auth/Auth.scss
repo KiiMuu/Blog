@@ -1,12 +1,23 @@
 @import '../../helpers/Variables';
 
+.error {
+    color: #a94442;
+    font-weight: 600;
+    margin-top: 15px;
+    margin-bottom: -5px;
+    background: rgba(169, 68, 66, .1);
+    padding: 5px 15px;
+    border: 1px solid rgba(169, 68, 66, .5);
+    border-radius: 2px;
+}
+
 .signup {
     .uk-container-small {
         max-width: 400px;
     }
     .signup-form {
-        margin-top: 50px;
-        padding: 30px;
+        margin-top: 55px;
+        padding: 40px;
         border-radius: 5px;
         box-shadow: 0 0 40px 10px rgba(0, 0, 0, 0.08);
         .form-heading {

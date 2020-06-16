@@ -2,7 +2,9 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faUserAlt, faKey, faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
-import './Signup.scss';
+import './Auth.scss';
+import { signup } from '../../actions/auth';
+import Spinner from '../layout/spinner/Spinner';
 
 const SignupComponent = () => {
 
@@ -29,8 +31,39 @@ const SignupComponent = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.table({ name, email, password, error, loading, message, showForm });
+        // console.table({ name, email, password, error, loading, message, showForm });
+        setValues({
+            ...values,
+            loading: true,
+            error: false
+        });
+        const user = { name, email, password };
+
+        signup(user).then(data => {
+            if (data.error) {
+                setValues({
+                    ...values,
+                    error: data.error,
+                    loading: false
+                });
+            } else {
+                setValues({
+                    ...values,
+                    name: '',
+                    email: '',
+                    password: '',
+                    error: '',
+                    loading: false,
+                    message: data.message,
+                    showForm: false
+                });
+            }
+        })
     }    
+
+    const showLoading = () => loading ? <Spinner /> : '';
+    const showError = () => error ? <div className="error">{error}</div> : '';
+    const showMessage = () => message ? <div className="message">{message}</div> : '';
 
     const signupForm = () => {
         return (
@@ -39,6 +72,8 @@ const SignupComponent = () => {
                     <h2 className="uk-text-uppercase">Signup</h2>
                     <p className="uk-text-muted">Register with a new account</p>
                 </div>
+                {showError()}
+                {showMessage()}
                 <div className="inputs">
                     <form onSubmit={handleSubmit} noValidate>
                         <div className="uk-grid-small uk-child-width-1-1@s" data-uk-grid>
@@ -128,7 +163,8 @@ const SignupComponent = () => {
         <div className="signup">
             <div className="uk-container uk-container-small">
                 <div className="uk-child-width-1-1@m uk-flex uk-flex-stretch" data-uk-grid>
-                    {signupForm()}
+                    {showLoading()}
+                    {showForm &&  signupForm()}
                 </div>
             </div>
         </div>
