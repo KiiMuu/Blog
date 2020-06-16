@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import Link from 'next/link';
+import Router from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEnvelope, faUserAlt, faKey, faLongArrowAltRight, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faKey, faLongArrowAltRight, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import './Auth.scss';
-import { signup } from '../../actions/auth';
+import { signin } from '../../actions/auth';
 import Spinner from '../layout/spinner/Spinner';
 
-const SignupComponent = () => {
+const SigninComponent = () => {
 
     const [isTyped, setIsTyped] = useState(false);
     const [values, setValues] = useState({
-        name: '',
         email: '',
         password: '',
         error: '',
@@ -19,7 +19,7 @@ const SignupComponent = () => {
         showForm: true
     });
 
-    const { name, email, password, error, loading, message, showForm } = values;
+    const { email, password, error, loading, message, showForm } = values;
 
     const handleChange = name => e => {
         setValues({
@@ -37,9 +37,9 @@ const SignupComponent = () => {
             loading: true,
             error: false
         });
-        const user = { name, email, password };
+        const user = { email, password };
 
-        signup(user).then(data => {
+        signin(user).then(data => {
             if (data.error) {
                 setValues({
                     ...values,
@@ -47,16 +47,10 @@ const SignupComponent = () => {
                     loading: false
                 });
             } else {
-                setValues({
-                    ...values,
-                    name: '',
-                    email: '',
-                    password: '',
-                    error: '',
-                    loading: false,
-                    message: data.message,
-                    showForm: false
-                });
+                // save user token to cookie
+                // save user info in localstorage
+                // authenticate user
+                Router.push('/');
             }
         })
     }    
@@ -65,39 +59,18 @@ const SignupComponent = () => {
     const showError = () => error ? <div className="error"><span><FontAwesomeIcon icon={faExclamationCircle} /></span> {error}</div> : '';
     const showMessage = () => message ? <div className="message">{message}</div> : '';
 
-    const signupForm = () => {
+    const signinForm = () => {
         return (
-            <div className="signup-form">
+            <div className="signin-form">
                 <div className="form-heading uk-text-center">
-                    <h2 className="uk-text-uppercase">Signup</h2>
-                    <p className="uk-text-muted">Register with a new account</p>
+                    <h2 className="uk-text-uppercase">Signin</h2>
+                    <p className="uk-text-muted">Login with a your current account</p>
                 </div>
                 {showError()}
                 {showMessage()}
                 <div className="inputs">
                     <form onSubmit={handleSubmit} noValidate>
                         <div className="uk-grid-small uk-child-width-1-1@s" data-uk-grid>
-                            <div className="input">
-                                <label 
-                                    style={{
-                                        opacity: (isTyped && document.activeElement.id === 'name') ? '1' : '0',
-                                        left: isTyped ? '0' : '', 
-                                        transition: '.2s cubic-bezier(0.68, -0.55, 0.27, 1.55)'
-                                    }}
-                                >Name</label>
-                                <input 
-                                    className="uk-input"
-                                    type="text"
-                                    id="name"
-                                    placeholder="Type your name"
-                                    value={name}
-                                    onChange={handleChange('name')}
-                                    onKeyPress={() => setIsTyped(true)}
-                                    onBlur={() => setIsTyped(false)}
-                                />
-                                <span className="border"></span>
-                                <span><FontAwesomeIcon icon={faUserAlt} /></span>
-                            </div>
                             <div className="input">
                                 <label
                                     style={{
@@ -139,14 +112,14 @@ const SignupComponent = () => {
                                 />
                                 <span><FontAwesomeIcon icon={faKey} /></span>
                             </div>
-                            <div className="signup-control">
+                            <div className="signin-control">
                                 <div className="uk-child-width-1-2 uk-flex uk-flex-middle" data-uk-grid>
-                                    <div className="signup-btn uk-text-left">
-                                        <button type="submit">Sign Up</button>
+                                    <div className="signin-btn uk-text-left">
+                                        <button type="submit">Sign In</button>
                                     </div>
-                                    <div className="signin-btn uk-text-right">
-                                        <Link href="/signin">
-                                            <a>Sign In?</a>
+                                    <div className="signup-btn uk-text-right">
+                                        <Link href="/signup">
+                                            <a>Sign Up?</a>
                                         </Link>
                                         <span><FontAwesomeIcon icon={faLongArrowAltRight} /></span>
                                     </div>
@@ -160,15 +133,15 @@ const SignupComponent = () => {
     }
 
     return (
-        <div className="signup">
+        <div className="signin">
             <div className="uk-container uk-container-small">
                 <div className="uk-child-width-1-1@m uk-flex uk-flex-stretch" data-uk-grid>
                     {showLoading()}
-                    {showForm &&  signupForm()}
+                    {showForm &&  signinForm()}
                 </div>
             </div>
         </div>
     )
 }
 
-export default SignupComponent;
+export default SigninComponent;

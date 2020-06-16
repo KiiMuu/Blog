@@ -6,16 +6,19 @@
     margin-top: 15px;
     margin-bottom: -5px;
     background: rgba(169, 68, 66, .1);
-    padding: 5px 15px;
+    padding: 5px 10px;
     border: 1px solid rgba(169, 68, 66, .5);
     border-radius: 2px;
+    span {
+        margin-right: 2px;
+    }
 }
 
-.signup {
+.signup, .signin {
     .uk-container-small {
         max-width: 400px;
     }
-    .signup-form {
+    .signup-form, .signin-form {
         margin-top: 55px;
         padding: 40px;
         border-radius: 5px;
@@ -66,9 +69,9 @@
                 margin-top: 0;
             }
 
-            .signup-control {
+            .signup-control, .signin-control {
                 margin-top: 25px;
-                .signup-btn {
+                .signup-btn, .signin-btn {
                     button {
                         text-transform: uppercase;
                         border: none;
@@ -80,7 +83,7 @@
                         outline: none;
                     }
                 }
-                .signin-btn {
+                .signin-btn, .signup-btn {
                     a {
                         text-decoration: none;
                         text-transform: uppercase;
