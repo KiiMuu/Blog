@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Router from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faUserAlt, faKey, faLongArrowAltRight, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import './Auth.scss';
-import { signup } from '../../actions/auth';
+import { signup, isAuth } from '../../actions/auth';
 import Spinner from '../layout/spinner/Spinner';
 
 const SignupComponent = () => {
@@ -20,6 +21,10 @@ const SignupComponent = () => {
     });
 
     const { name, email, password, error, loading, message, showForm } = values;
+
+    useEffect(() => {
+        isAuth() && Router.push('/');
+    }, []); 
 
     const handleChange = name => e => {
         setValues({
