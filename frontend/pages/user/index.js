@@ -1,9 +1,12 @@
 import Layout from '../../components/layout/Layout';
+import Private from '../../components/auth/Private';
 
 const UserIndex = () => {
     return (
         <Layout>
-            <h2>User Dashboard</h2>
+            <Private>
+                <h2>User Dashboard</h2>
+            </Private>
         </Layout>
     )
 }
