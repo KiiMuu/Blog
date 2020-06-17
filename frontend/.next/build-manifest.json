@@ -37,12 +37,6 @@
       "static/chunks/styles.chunk.css",
       "static/chunks/styles.js",
       "static/runtime/main.js"
-    ],
-    "/signup": [
-      "static/runtime/webpack.js",
-      "static/chunks/styles.chunk.css",
-      "static/chunks/styles.js",
-      "static/runtime/main.js"
     ]
   }
 }

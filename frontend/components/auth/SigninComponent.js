@@ -4,7 +4,7 @@ import Router from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faKey, faLongArrowAltRight, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import './Auth.scss';
-import { signin } from '../../actions/auth';
+import { signin, authenticate } from '../../actions/auth';
 import Spinner from '../layout/spinner/Spinner';
 
 const SigninComponent = () => {
@@ -50,7 +50,9 @@ const SigninComponent = () => {
                 // save user token to cookie
                 // save user info in localstorage
                 // authenticate user
-                Router.push('/');
+                authenticate(data, () => {
+                    Router.push('/');
+                });
             }
         })
     }    
