@@ -27,10 +27,10 @@ router.get(
 );
 
 // test route
-router.get('/secret', authController.requireSignIn, (req, res) => {
-    res.json({
-        message: 'You have access to secret page'
-    });
-});
+// router.get('/secret', authController.requireSignIn, (req, res) => {
+//     res.json({
+//         user: req.user
+//     });
+// });
 
 module.exports = router;
