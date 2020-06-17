@@ -1,7 +1,9 @@
+import { Fragment } from 'react';
 import { APP_NAME } from '../../config';
 import Link from 'next/link';
-
 import './Header.scss';
+import { signout, isAuth } from '../../actions/auth';
+import Router from 'next/router';
 
 const Header = () => {
     return (
@@ -17,12 +19,19 @@ const Header = () => {
                             </div>
                             <div className="uk-navbar-right">
                                 <ul className="uk-navbar-nav uk-visible@s">
-                                    <li className="navLink">
-                                        <Link href="/signup"><a>SignUp</a></Link>
-                                    </li>
-                                    <li className="navLink">
-                                        <Link href="/signin"><a>SignIn</a></Link>
-                                    </li>
+                                    {!isAuth() && <Fragment>
+                                        <li className="navLink">
+                                            <Link href="/signup"><a>SignUp</a></Link>
+                                        </li>
+                                        <li className="navLink">
+                                            <Link href="/signin"><a>SignIn</a></Link>
+                                        </li>
+                                    </Fragment>}
+                                    {isAuth() && (
+                                        <li className="navLink">
+                                            <a onClick={() => signout(() => {Router.replace('/signin')})}>SignOut</a>
+                                        </li>
+                                    )}
                                 </ul>
                                 {/* Show Nav items in sidebar in phone screens */}
                                 <div className="uk-hidden@s">
