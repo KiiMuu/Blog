@@ -27,6 +27,16 @@ const Header = () => {
                                             <Link href="/signin"><a>SignIn</a></Link>
                                         </li>
                                     </Fragment>}
+                                    {isAuth() && isAuth().role === 0 && (
+                                        <li className="navLink">
+                                            <a href="/user">{`${isAuth().name}'s Dashboard`}</a>
+                                        </li>
+                                    )}
+                                    {isAuth() && isAuth().role === 1 && (
+                                        <li className="navLink">
+                                            <a href="/admin">{`${isAuth().name}'s Dashboard`}</a>
+                                        </li>
+                                    )}
                                     {isAuth() && (
                                         <li className="navLink">
                                             <a onClick={() => signout(() => {Router.replace('/signin')})}>SignOut</a>
