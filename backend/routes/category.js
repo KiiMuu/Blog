@@ -16,7 +16,15 @@ router.post(
     categoryValidator,
     authController.requireSignIn, 
     authController.adminMiddleware,
-    categoryController.create
+    categoryController.createCategory
+);
+router.get('/categories', categoryController.categoriesList);
+router.get('/category/:slug', categoryController.readCategory);
+router.delete(
+    '/category/:slug', 
+    authController.requireSignIn, 
+    authController.adminMiddleware,
+    categoryController.removeCategory
 );
 
 module.exports = router;
