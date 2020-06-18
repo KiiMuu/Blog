@@ -1,17 +1,17 @@
-const Category = require('../models/category');
+const Tag = require('../models/tag');
 const slugify = require('slugify'); // new category => new-category
 const { errorHandler } = require('../helpers/dbErrorHandler');
 
-exports.createCategory = (req, res, next) => {
+exports.createTag = (req, res, next) => {
     const { name } = req.body;
     let slug = slugify(name).toLowerCase();
 
-    let category = new Category({
+    let tag = new Tag({
         name,
         slug
     });
 
-    category.save((err, data) => {
+    tag.save((err, data) => {
         if (err) {
             return res.status(400).json({
                 error: errorHandler(err)
@@ -22,8 +22,8 @@ exports.createCategory = (req, res, next) => {
     });
 }
 
-exports.categoriesList = (req, res, next) => {
-    Category.find({}).exec((err, data) => {
+exports.tagsList = (req, res, next) => {
+    Tag.find({}).exec((err, data) => {
         if (err) {
             return res.status(400).json({
                 error: errorHandler(err)
@@ -34,24 +34,24 @@ exports.categoriesList = (req, res, next) => {
     });
 }
 
-exports.readCategory = (req, res, next) => {
+exports.readTag = (req, res, next) => {
     const slug = req.params.slug.toLowerCase();
 
-    Category.findOne({ slug }).exec((err, category) => {
+    Tag.findOne({ slug }).exec((err, tag) => {
         if (err) {
             return res.status(400).json({
                 error: errorHandler(err)
             });
         }
 
-        res.json(category);
+        res.json(tag);
     });
 }
 
-exports.removeCategory = (req, res, next) => {
+exports.removeTag = (req, res, next) => {
     const slug = req.params.slug.toLowerCase();
 
-    Category.findOneAndRemove({ slug }).exec((err, data) => {
+    Tag.findOneAndRemove({ slug }).exec((err, data) => {
         if (err) {
             return res.status(400).json({
                 error: errorHandler(err)
@@ -59,7 +59,7 @@ exports.removeCategory = (req, res, next) => {
         }
 
         res.json({
-            message: 'Category deleted successfully'
+            message: 'Tag deleted successfully'
         });
     });
 }
