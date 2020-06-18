@@ -2,24 +2,25 @@
 @import '../../helpers/Mixins';
 
 .header {
-    background: $mainColor;
+    background: #fff;
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.09);
     .logo {
-        color: $lightColor;
+        color: $darkColor;
         font-size: 18px;
     }
     .navLink {
         @include linkHoverEffect;
         a {
-            color: $lightColor;
+            color: $darkColor;
             &:hover, &:active, &:focus {
-                color: $lightColor;
+                color: $darkColor;
             }
         }
     }
     // menu button
     .menuBtn {
         background: transparent;
-        color: $lightColor;
+        color: $darkColor;
         @include linkHoverEffect;
     }
 }
