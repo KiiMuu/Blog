@@ -1,6 +1,11 @@
 @import '../../helpers/Variables';
 @import '../../helpers/Mixins';
 
+#nprogress .bar {
+    background: $mainColor !important;
+    height: 4px !important;
+}
+
 .header {
     background: #fff;
     box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.09);
@@ -14,6 +19,13 @@
             color: $darkColor;
             &:hover, &:active, &:focus {
                 color: $darkColor;
+            }
+            span {
+                margin-left: 5px;
+                margin-top: -1px;
+                &:first-child {
+                    color: $mainColor;
+                }
             }
         }
     }

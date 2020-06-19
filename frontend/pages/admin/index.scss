@@ -1,0 +1,35 @@
+@import '../../helpers/Variables';
+
+.admin-dashboard {
+    .dash-heading {
+        margin-bottom: 30px;
+        h2 {
+            margin: 0;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        sup {
+            background: $mainColor;
+            color: $lightColor;
+            padding: 1px 5px;
+            text-transform: uppercase;
+        }
+    }
+    .sidebar {
+        ul {
+            li {
+                box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.11);
+                padding: 10px 20px;
+                a {
+                    text-decoration: none;
+                    color: $mainColor;
+                    font-size: 14px;
+                }
+                span {
+                    color: $mainColor;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}

@@ -9,12 +9,6 @@
     "static/development/_ssgManifest.js"
   ],
   "pages": {
-    "/": [
-      "static/runtime/webpack.js",
-      "static/chunks/styles.chunk.css",
-      "static/chunks/styles.js",
-      "static/runtime/main.js"
-    ],
     "/_app": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
@@ -26,19 +20,13 @@
     "/_polyfills": [
       "static/runtime/polyfills.js"
     ],
-    "/index": [
+    "/admin": [
       "static/runtime/webpack.js",
       "static/chunks/styles.chunk.css",
       "static/chunks/styles.js",
       "static/runtime/main.js"
     ],
-    "/signin": [
-      "static/runtime/webpack.js",
-      "static/chunks/styles.chunk.css",
-      "static/chunks/styles.js",
-      "static/runtime/main.js"
-    ],
-    "/signup": [
+    "/admin/crud/category-tag": [
       "static/runtime/webpack.js",
       "static/chunks/styles.chunk.css",
       "static/chunks/styles.js",
