@@ -1,6 +1,7 @@
 import Layout from '../../../components/layout/Layout';
 import Admin from '../../../components/auth/Admin';
 import './crud.scss';
+import Category from '../../../components/crud/category/Category';
 
 const CategoryTag = () => {
     return (
@@ -13,7 +14,7 @@ const CategoryTag = () => {
                         </div>
                         <div data-uk-grid>
                             <div className="uk-width-1-2@m">
-                                <p>Categories</p>
+                                <Category />
                             </div>
                             <div className="uk-child-1-2@m">
                                 <p>Tags</p>
