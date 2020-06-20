@@ -1,13 +1,13 @@
 const Blog = require('../models/blog');
 const Category = require('../models/category');
 const Tag = require('../models/tag');
-const fs = require('fs');
 const { errorHandler } = require('../helpers/dbErrorHandler');
+const { smartTrim } = require('../helpers/blog');
+const fs = require('fs');
 const formidable = require('formidable');
 const slugify = require('slugify');
 const stripHtml = require('string-strip-html');
 const _ = require('lodash');
-const { result } = require('lodash');
 
 exports.createBlog = (req, res, next) => {
     let form = new formidable.IncomingForm();
@@ -49,6 +49,7 @@ exports.createBlog = (req, res, next) => {
         const blog = new Blog({
             title,
             body,
+            excerpt: smartTrim(body, 320, ' ', ' ...'),
             slug: slugify(title).toLowerCase(),
             mtitle: `${title} | ${process.env.APP_NAME}`,
             mdesc: stripHtml(body.substring(0, 160)),
@@ -77,7 +78,6 @@ exports.createBlog = (req, res, next) => {
                 });
             }
 
-            // res.json(result);
             Blog.findByIdAndUpdate(result._id, 
                 { $push: {
                     categories: arrOfCategories
