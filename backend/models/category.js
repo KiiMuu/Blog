@@ -11,8 +11,8 @@ const categorySchema = new Schema({
     },
     slug: {
         type: String,
-        lowercase: true,
-        index: true,
+        unique: true,
+        index: true
     }
 }, {
     timestamps: true
