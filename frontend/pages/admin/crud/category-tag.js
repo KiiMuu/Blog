@@ -9,7 +9,7 @@ const CategoryTag = () => {
             <Admin>
                 <div className="category-tag uk-margin-medium-top">
                     <div className="uk-container">
-                        <div className="dash-heading">
+                        <div className="category_tag-heading uk-text-center">
                             <h2>Manage Categories and Tags</h2>
                         </div>
                         <div data-uk-grid>

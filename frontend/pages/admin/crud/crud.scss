@@ -1,0 +1,12 @@
+@import '../../../helpers/Variables';
+
+.category-tag {
+    .category_tag-heading {
+        margin-bottom: 30px;
+        h2 {
+            margin: 0;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+    }
+}

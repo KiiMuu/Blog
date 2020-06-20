@@ -1,0 +1,12 @@
+@import '../../helpers/Variables';
+
+.footer {
+    margin-top: 50px;
+    padding: 30px;
+    background: #fff;
+    p {
+        a {
+            color: $mainColor;
+        }
+    }
+}

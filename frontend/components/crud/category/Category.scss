@@ -1,0 +1,92 @@
+@import '../../../helpers/Variables';
+
+.form-inputs {
+    label {
+        color: $darkColor;
+        font-weight: 600;
+    }
+    .uk-input {
+        margin-top: 5px;
+        height: 50px;
+        border-radius: 2px;
+        border-color: #dddfdf;
+        transition: all 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0s;
+        &:focus {
+            border-color: #80bdff;
+            box-shadow: 0 0 0 0.2rem rgba(2, 135, 207, .3);
+            outline: none;
+        }
+    }
+}
+
+.create-btn {
+    button {
+        margin-top: 15px;
+        background: $mainColor;
+        border: none;
+        color: $lightColor;
+        padding: 10px 20px;
+        cursor: pointer;
+        outline: none;
+        margin-bottom: 30px;
+    }
+}
+
+.no-categories {
+    margin: 0;
+    background: rgba(216, 234, 252, .4);
+    padding: 10px;
+    border-left: 3px solid $mainColor;
+    padding-left: 10px;
+    color: $darkColor;
+}
+
+.category-name {
+    &:not(:first-child) {
+        margin-right: 10px;
+    }
+    background: transparent;
+    border: 2px solid $mainColor;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: 600;
+    color: $darkColor;
+    margin-bottom: 5px;
+}
+
+.alert-message {
+    position: relative;
+    .message {
+        position: absolute;
+        opacity: 0;
+        top: -60px;
+        z-index: 99;
+        padding: 5px 10px;
+        border-radius: 2px;
+        animation: messageAlert .15s linear;
+        span {
+            margin-left: 5px;
+        }
+    }
+    .success {
+        color: #32d296;
+        background: #edfbf6;
+    }
+    .error {
+        color: #f0506e;
+        background: #f8f8f8;
+    }
+    .removed {
+        color: #faa05a;
+        background: #fff6ee;
+    }
+}
+
+@keyframes messageAlert {
+    from {
+        left: -60px;
+    }
+    to {
+        left: 0;
+    }
+}
