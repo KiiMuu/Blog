@@ -28,6 +28,12 @@ const AdminIndex = () => {
                                             </Link>
                                             <span className="uk-float-right"><FontAwesomeIcon icon={faPlus} /></span>
                                         </li>
+                                        <li>
+                                            <Link href="/admin/crud/category-tag">
+                                                <a className="uk-text-uppercase">Create Tag</a>
+                                            </Link>
+                                            <span className="uk-float-right"><FontAwesomeIcon icon={faPlus} /></span>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

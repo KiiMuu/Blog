@@ -1,7 +1,8 @@
 import Layout from '../../../components/layout/Layout';
 import Admin from '../../../components/auth/Admin';
 import './crud.scss';
-import Category from '../../../components/crud/category/Category';
+import Category from '../../../components/crud/Category';
+import Tag from '../../../components/crud/Tag';
 
 const CategoryTag = () => {
     return (
@@ -12,12 +13,12 @@ const CategoryTag = () => {
                         <div className="category_tag-heading uk-text-center">
                             <h2>Manage Categories and Tags</h2>
                         </div>
-                        <div data-uk-grid>
-                            <div className="uk-width-1-2@m">
+                        <div className="uk-grid-small uk-child-width-1-2@m" data-uk-grid>
+                            <div>
                                 <Category />
                             </div>
-                            <div className="uk-child-1-2@m">
-                                <p>Tags</p>
+                            <div>
+                                <Tag />
                             </div>
                         </div>
                     </div>

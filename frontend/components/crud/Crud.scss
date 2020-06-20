@@ -1,4 +1,4 @@
-@import '../../../helpers/Variables';
+@import '../../helpers/Variables';
 
 .form-inputs {
     label {
@@ -32,7 +32,7 @@
     }
 }
 
-.no-categories {
+.no-categories, .no-tags {
     margin: 0;
     background: rgba(216, 234, 252, .4);
     padding: 10px;
@@ -41,7 +41,7 @@
     color: $darkColor;
 }
 
-.category-name {
+.category-name, .tag-name {
     &:not(:first-child) {
         margin-right: 10px;
     }
@@ -50,7 +50,7 @@
     padding: 5px 10px;
     cursor: pointer;
     font-weight: 600;
-    color: $darkColor;
+    color: $mainColor;
     margin-bottom: 5px;
 }
 

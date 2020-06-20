@@ -1,11 +1,11 @@
 import { useState, useEffect, Fragment } from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
-import './Category.scss';
+import './Crud.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle, faTrash, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
-import { isAuth, getCookie } from '../../../actions/auth';
-import { createCategory, getCategories, removeCategory } from '../../../actions/category';
+import { getCookie } from '../../actions/auth';
+import { createCategory, getCategories, removeCategory } from '../../actions/category';
 
 const Category = () => {
     const [values, setValues] = useState({
@@ -157,11 +157,11 @@ const Category = () => {
     const newCategoryForm = () => (
         <form onSubmit={handleSubmit}>
             <div className="form-inputs">
-                <label className="uk-form-label uk-text-uppercase" htmlFor="name">Category Name</label>
+                <label className="uk-form-label uk-text-uppercase" htmlFor="catName">Category Name</label>
                 <div className="uk-form-controls">
                     <input
                         className="uk-input"
-                        id="name"
+                        id="catName"
                         type="text"
                         placeholder="Type category name"
                         onChange={handleChange}
