@@ -3,7 +3,7 @@ import Admin from '../../components/auth/Admin';
 import Link from 'next/link';
 import './index.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faBlog } from '@fortawesome/free-solid-svg-icons';
 import { isAuth } from '../../actions/auth';
 
 const AdminIndex = () => {
@@ -24,15 +24,15 @@ const AdminIndex = () => {
                                     <ul className="uk-list">
                                         <li>
                                             <Link href="/admin/crud/category-tag">
-                                                <a className="uk-text-uppercase">Create Category</a>
+                                                <a className="uk-text-uppercase">Create Category &amp; Tag</a>
                                             </Link>
-                                            <span className="uk-float-right"><FontAwesomeIcon icon={faPlus} /></span>
+                                            <span className="uk-float-right plus"><FontAwesomeIcon icon={faPlus} /></span>
                                         </li>
                                         <li>
-                                            <Link href="/admin/crud/category-tag">
-                                                <a className="uk-text-uppercase">Create Tag</a>
+                                            <Link href="/admin/crud/blog">
+                                                <a className="uk-text-uppercase">Create Blog</a>
                                             </Link>
-                                            <span className="uk-float-right"><FontAwesomeIcon icon={faPlus} /></span>
+                                            <span className="uk-float-right create-blog"><FontAwesomeIcon icon={faBlog} /></span>
                                         </li>
                                     </ul>
                                 </div>
