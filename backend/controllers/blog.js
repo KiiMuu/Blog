@@ -105,3 +105,36 @@ exports.createBlog = (req, res, next) => {
         });
     });
 }
+
+exports.allBlogs = (req, res, next) => {
+    Blog.find({})
+    .populate('categories', '_id name slug')
+    .populate('tags', '_id name slug')
+    .populate('postedBy', '_id name username')
+    .select('_id title slug excerpt categories tags postedBy createdAt updatedAt')
+    .exec((err, data) => {
+        if (err) {
+            return res.status(400).json({
+                error: errorHandler(err)
+            });
+        }
+
+        res.json(data);
+    });
+}
+
+exports.allCatgeoriesTagsBlogs = (req, res, next) => {
+    
+}
+
+exports.readBlog = (req, res, next) => {
+    
+}
+
+exports.removeBlog = (req, res, next) => {
+    
+}
+
+exports.updateBlog = (req, res, next) => {
+    
+}

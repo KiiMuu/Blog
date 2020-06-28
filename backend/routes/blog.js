@@ -12,5 +12,20 @@ router.post(
     authController.adminMiddleware, 
     blogController.createBlog
 );
+router.get('/blogs', blogController.allBlogs);
+router.post('/blogs-categories-tags', blogController.allCatgeoriesTagsBlogs);
+router.get('/blog/:slug', blogController.readBlog);
+router.delete(
+    '/blog/:slug',
+    authController.requireSignIn, 
+    authController.adminMiddleware,  
+    blogController.removeBlog
+);
+router.put(
+    '/blog/:slug',
+    authController.requireSignIn, 
+    authController.adminMiddleware,  
+    blogController.updateBlog
+);
 
 module.exports = router;
