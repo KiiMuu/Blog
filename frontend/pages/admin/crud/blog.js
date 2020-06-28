@@ -1,7 +1,7 @@
 import Layout from '../../../components/layout/Layout';
 import Admin from '../../../components/auth/Admin';
 import CreateBlog from '../../../components/crud/CreateBlog'
-import './crud.scss';
+import './admin-crud.scss';
 
 const Blog = () => {
     return (
@@ -12,10 +12,8 @@ const Blog = () => {
                         <div className="blog-heading uk-text-center">
                             <h2>Create a new blog</h2>
                         </div>
-                        <div className="uk-child-width-1-1@m" data-uk-grid>
-                            <div>
-                                <CreateBlog />
-                            </div>
+                        <div data-uk-grid>
+                            <CreateBlog />
                         </div>
                     </div>
                 </div>

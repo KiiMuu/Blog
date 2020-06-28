@@ -1,6 +1,6 @@
 import Layout from '../../../components/layout/Layout';
 import Admin from '../../../components/auth/Admin';
-import './crud.scss';
+import './admin-crud.scss';
 import Category from '../../../components/crud/Category';
 import Tag from '../../../components/crud/Tag';
 

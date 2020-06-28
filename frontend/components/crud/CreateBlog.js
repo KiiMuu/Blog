@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import { withRouter } from 'next/router';
 import './Crud.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { getCookie, isAuth } from '../../actions/auth';
 import { createBlog } from '../../actions/blog';
 import { getCategories } from '../../actions/category';
@@ -26,6 +26,7 @@ const CreateBlog = ({ router }) => {
         }
     }
 
+    // initial states
     const [body, setBody] = useState(blogFromLS());
     const [values, setValues] = useState({
         error: '',
@@ -35,6 +36,10 @@ const CreateBlog = ({ router }) => {
         title: '',
         hidePublishButton: false
     });
+    const [categories, setCategories] = useState([]);
+    const [tags, setTags] = useState([]);
+    const [checkedCat, setCheckedCat] = useState([]);
+    const [checkedTag, setCheckedTag] = useState([]);
 
     const { error, sizeError, success, formData, title, hidePublishButton } = values;
 
@@ -43,8 +48,38 @@ const CreateBlog = ({ router }) => {
             ...values,
             formData: new FormData()
         });
+        initialCategories();
+        initialTags();
     }, [router]);
 
+    // get categories and tags
+    const initialCategories = () => {
+        getCategories().then(data => {
+            if (data.error) {
+                setValues({
+                    ...values,
+                    error: data.error
+                });
+            } else {
+                setCategories(data);
+            }
+        });
+    }
+
+    const initialTags = () => {
+        getTags().then(data => {
+            if (data.error) {
+                setValues({
+                    ...values,
+                    error: data.error
+                });
+            } else {
+                setTags(data);
+            }
+        });
+    }
+
+    // evenet handlers
     const handleChange = name => e => {
         // console.log(e.target.value);
         const value = name === 'photo' ? e.target.files[0] : e.target.value;
@@ -65,6 +100,50 @@ const CreateBlog = ({ router }) => {
         if (typeof window !== 'undefined') {
             localStorage.setItem('blog', JSON.stringify(e));
         }
+    }
+
+    const handleToggle = category => () => {
+        setValues({
+            ...values,
+            error: ''
+        });
+
+        // return the first index or -1
+        const clickedCategory = checkedCat.indexOf(category);
+        const all = [...checkedCat];
+
+        if (clickedCategory === -1) {
+            all.push(category);
+        } else {
+            all.splice(clickedCategory, 1);
+        }
+
+        console.log(all);
+        setCheckedCat(all);
+        formData.set('categories', all)
+    }
+
+    // show categories and tags
+    const showCategories = () => {
+        return (
+            categories && categories.map((category, i) => (
+                <span key={i}>
+                    <input onChange={handleToggle(category._id)} type="checkbox" className="uk-checkbox" />
+                    <label>{category.name}</label>
+                </span>
+            ))
+        );
+    }
+
+    const showTags = () => {
+        return (
+            tags && tags.map((tag, i) => (
+                <span key={i}>
+                    <input type="checkbox" className="uk-checkbox" />
+                    <label>{tag.name}</label>
+                </span>
+            ))
+        );
     }
 
     const handleSubmit = e => {
@@ -105,11 +184,40 @@ const CreateBlog = ({ router }) => {
         );
     }
 
+    var maxHeigth = 100;
+
     return (
-        <div>
-            {blogForm()}
+        <div className="blog_creation-content">
+            <div className="uk-grid-small" data-uk-grid>
+                <div className="uk-width-1-2@m">
+                    <div className="blog-form">
+                        {blogForm()}
+                    </div>
+                </div>
+                <div className="uk-width-1-2@m">
+                    <div className="categories-tags">
+                        <div className="categories">
+                            <h5 className="uk-text-uppercase">Categories</h5>
+                            <div className="categories-items">
+                                {showCategories()}
+                            </div>
+                        </div>
+                        <hr className="uk-divider-small" />
+                        <div className="tags">
+                            <h5 className="uk-text-uppercase">Tags</h5>
+                            <div className="tags-items">
+                                {showTags()}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <hr />
             {JSON.stringify(title)}
+            <hr />
             {JSON.stringify(body)}
+            <hr />
         </div>
     )
 }

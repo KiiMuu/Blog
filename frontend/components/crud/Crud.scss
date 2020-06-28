@@ -1,5 +1,6 @@
 @import '../../helpers/Variables';
 
+// Category.js && Tag.js
 .form-inputs {
     label {
         color: $darkColor;
@@ -90,3 +91,94 @@
         left: 0;
     }
 }
+
+// CreateBlog.js
+.blog_creation-content {
+    .categories-tags {
+        h5 {
+            color: $darkColor;
+            font-weight: 600;
+            margin: 0;
+        }
+        .categories, .tags {
+            .categories-items, .tags-items {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content:flex-start;
+                align-items: stretch;
+                max-height: 100px;
+                padding: 15px 10px;
+                overflow-y: auto;
+                scroll-behavior: smooth;
+                ::-webkit-scrollbar {
+                    background: red;
+                }
+                span {
+                    margin-right: 5px;
+                    padding: 5px;
+                    user-select: none;
+                    cursor: pointer;
+                    input {
+                        margin-right: 5px;
+                        height: 15px;
+                        width: 15px;
+                        margin-top: 0;
+                        border-radius: 2px;
+                        &:checked {
+                            background-color: $mainColor;
+                            animation: jelly .5s ease;
+                        }
+                    }
+                    label {
+                        font-weight: 600;
+                        color: $darkColor;
+                        &::after {
+                            content: '';
+                            display: block;
+                            background: $mainColor;
+                            height: 2px;
+                            position: relative;
+                            top: -10px;
+                            right: -20px;
+                            width: 0;
+                            transition: all .2s ease-in-out;
+                        }
+                    }
+                    input:checked + label:after {
+                        width: 50%;
+                        opacity: .5;
+                    }
+                    input:checked + label {
+                        opacity: .5;
+                        color: $mainColor;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes jelly {
+    from {
+        transform: scale(1, 1);
+    }
+    30% {
+        transform: scale(1.25, 0.75);
+    }
+    40% {
+        transform: scale(0.75, 1.25);
+    }
+    50% {
+        transform: scale(1.15, 0.85);
+    }
+    65% {
+        transform: scale(.95, 1.05);
+    }
+    75% {
+        transform: scale(1.05, .95);
+    }
+    to {
+        transform: scale(1, 1);
+    }
+}
+
