@@ -5,13 +5,14 @@ import dynamic from 'next/dynamic';
 import { withRouter } from 'next/router';
 import './Crud.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { getCookie, isAuth } from '../../actions/auth';
 import { createBlog } from '../../actions/blog';
 import { getCategories } from '../../actions/category';
 import { getTags } from '../../actions/tag';
 const ReactQuill = dynamic(() => import('react-quill'), {ssr: false});
 import '../../node_modules/react-quill/dist/quill.snow.css';
+import { QuillModules, QuillFormats } from '../../helpers/quil';
 
 const CreateBlog = ({ router }) => {
 
@@ -82,7 +83,6 @@ const CreateBlog = ({ router }) => {
 
     // evenet handlers
     const handleChange = name => e => {
-        // console.log(e.target.value);
         const value = name === 'photo' ? e.target.files[0] : e.target.value;
         formData.set(name, value);
 
@@ -183,12 +183,51 @@ const CreateBlog = ({ router }) => {
                     ...values,
                     title: '',
                     error: '',
-                    success: `A new blog titled ${data.title} is created`
+                    success: `A new blog titled "${data.title}" is created`
                 });
                 setBody('');
                 setCategories([]);
                 setTags([]);
             }
+        });
+    }
+
+    // messages
+    const showError = () => {
+        if (error) {
+            return (
+                <div className="alert-message" onMouseMove={handleMouseMove}>
+                    <p 
+                        className="message error"
+                        style={{
+                            opacity: error ? '1' : '0'
+                        }}
+                    >{error} <span><FontAwesomeIcon icon={faExclamationCircle} /></span></p>
+                </div>
+            )
+        }
+    }
+
+    const showSuccess = () => {
+        if (success) {
+            return (
+                <div className="alert-message" onMouseMove={handleMouseMove}>
+                    <p 
+                        className="message success"
+                        style={{
+                            opacity: success ? '1' : '0'
+                        }}
+                    >{success} <span><FontAwesomeIcon icon={faCheckCircle} /></span></p>
+                </div>
+            )
+        }
+    }
+
+    const handleMouseMove = () => {
+        setValues({
+            ...values,
+            error: false,
+            success: false
         });
     }
 
@@ -205,14 +244,13 @@ const CreateBlog = ({ router }) => {
                             placeholder="Type blog name"
                             onChange={handleChange('title')}
                             value={title}
-                            required
                         />
                     </div>
                 </div>
                 <div className="form-inputs">
                     <ReactQuill 
-                        modules={CreateBlog.modules}
-                        formats={CreateBlog.formats}
+                        modules={QuillModules}
+                        formats={QuillFormats}
                         value={body} 
                         placeholder="Write something to publish..." 
                         onChange={handleBody}
@@ -240,6 +278,8 @@ const CreateBlog = ({ router }) => {
                 </div>
                 <div className="uk-width-1-2@m">
                     <div className="blog-form">
+                        {showError()}
+                        {showSuccess()}
                         {blogForm()}
                     </div>
                 </div>
@@ -261,44 +301,8 @@ const CreateBlog = ({ router }) => {
                     </div>
                 </div>
             </div>
-            
-            <hr />
-            {JSON.stringify(title)}
-            <hr />
-            {JSON.stringify(body)}
-            <hr />
         </div>
     )
 }
-
-
-CreateBlog.modules = {
-    toolbar: [
-        [{ header: '1' }, { header: '2' }, { header: [3, 4, 5, 6] }, { font: [] }],
-        [{ size: [] }],
-        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-        [{ list: 'orderd' }, { list: 'bullet' }],
-        ['link', 'image', 'video'],
-        ['clean'],
-        ['code-block']
-    ]
-}
-
-CreateBlog.formats = [
-    'header',
-    'font',
-    'size',
-    'bold',
-    'italic',
-    'underline',
-    'strike',
-    'blockquote',
-    'list',
-    'bullet',
-    'link',
-    'image',
-    'video',
-    'code-block',
-]
 
 export default withRouter(CreateBlog);

@@ -25,6 +25,12 @@
       "static/chunks/styles.chunk.css",
       "static/chunks/styles.js",
       "static/runtime/main.js"
+    ],
+    "/admin/crud/category-tag": [
+      "static/runtime/webpack.js",
+      "static/chunks/styles.chunk.css",
+      "static/chunks/styles.js",
+      "static/runtime/main.js"
     ]
   }
 }
