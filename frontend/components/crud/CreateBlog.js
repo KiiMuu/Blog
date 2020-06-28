@@ -42,6 +42,7 @@ const CreateBlog = ({ router }) => {
     const [checkedTag, setCheckedTag] = useState([]);
 
     const { error, sizeError, success, formData, title, hidePublishButton } = values;
+    const token = getCookie('token');
 
     useEffect(() => {
         setValues({
@@ -102,7 +103,7 @@ const CreateBlog = ({ router }) => {
         }
     }
 
-    const handleToggle = category => () => {
+    const handleCatToggle = category => () => {
         setValues({
             ...values,
             error: ''
@@ -120,7 +121,28 @@ const CreateBlog = ({ router }) => {
 
         console.log(all);
         setCheckedCat(all);
-        formData.set('categories', all)
+        formData.set('categories', all);
+    }
+
+    const handleTagToggle = tag => () => {
+        setValues({
+            ...values,
+            error: ''
+        });
+
+        // return the first index or -1
+        const clickedTag = checkedTag.indexOf(tag);
+        const all = [...checkedTag];
+
+        if (clickedTag === -1) {
+            all.push(tag);
+        } else {
+            all.splice(clickedTag, 1);
+        }
+
+        console.log(all);
+        setCheckedTag(all);
+        formData.set('tags', all);
     }
 
     // show categories and tags
@@ -128,7 +150,7 @@ const CreateBlog = ({ router }) => {
         return (
             categories && categories.map((category, i) => (
                 <span key={i}>
-                    <input onChange={handleToggle(category._id)} type="checkbox" className="uk-checkbox" />
+                    <input onChange={handleCatToggle(category._id)} type="checkbox" className="uk-checkbox" />
                     <label>{category.name}</label>
                 </span>
             ))
@@ -139,7 +161,7 @@ const CreateBlog = ({ router }) => {
         return (
             tags && tags.map((tag, i) => (
                 <span key={i}>
-                    <input type="checkbox" className="uk-checkbox" />
+                    <input onChange={handleTagToggle(tag._id)} type="checkbox" className="uk-checkbox" />
                     <label>{tag.name}</label>
                 </span>
             ))
@@ -149,6 +171,25 @@ const CreateBlog = ({ router }) => {
     const handleSubmit = e => {
         e.preventDefault();
         console.log('Blog published!');
+
+        createBlog(formData, token).then(data => {
+            if (data.error) {
+                setValues({
+                    ...values,
+                    error: data.error
+                });
+            } else {
+                setValues({
+                    ...values,
+                    title: '',
+                    error: '',
+                    success: `A new blog titled ${data.title} is created`
+                });
+                setBody('');
+                setCategories([]);
+                setTags([]);
+            }
+        });
     }
 
     const blogForm = () => {
@@ -184,11 +225,19 @@ const CreateBlog = ({ router }) => {
         );
     }
 
-    var maxHeigth = 100;
-
     return (
         <div className="blog_creation-content">
             <div className="uk-grid-small" data-uk-grid>
+                <div className="uk-width-1-1">
+                    <div className="featured-img">
+                        <h5 className="uk-text-uppercase">Featured image</h5>
+                        <small>Max size: 1MB</small>
+                        <div data-uk-form-custom>
+                            <input onChange={handleChange('photo')} type="file" accept="image/*" />
+                            <button className="uk-button uk-button-default" type="button" tabIndex="-1">Select</button>
+                        </div>
+                    </div>
+                </div>
                 <div className="uk-width-1-2@m">
                     <div className="blog-form">
                         {blogForm()}

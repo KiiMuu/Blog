@@ -94,6 +94,19 @@
 
 // CreateBlog.js
 .blog_creation-content {
+    .featured-img {
+        h5 {
+            color: $darkColor;
+            font-weight: 600;
+            margin: 0;
+        }
+        .uk-form-custom {
+            display: block;
+        }
+        .uk-button-default {
+            margin-top: 10px;
+        }
+    }
     .categories-tags {
         h5 {
             color: $darkColor;
@@ -182,3 +195,17 @@
     }
 }
 
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb {
+    background: $mainColor;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: $mainColor;
+}
