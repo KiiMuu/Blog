@@ -8,7 +8,6 @@ const formidable = require('formidable');
 const slugify = require('slugify');
 const stripHtml = require('string-strip-html');
 const _ = require('lodash');
-const blog = require('../models/blog');
 
 exports.createBlog = (req, res, next) => {
     let form = new formidable.IncomingForm();
@@ -183,6 +182,7 @@ exports.readBlog = (req, res, next) => {
     const slug = req.params.slug.toLowerCase();
     
     Blog.findOne({ slug })
+    // .select('-photo')
     .populate('categories', '_id name slug')
     .populate('tags', '_id name slug')
     .populate('postedBy', '_id name username')
@@ -271,9 +271,27 @@ exports.updateBlog = (req, res, next) => {
                     });
                 }
 
+                // result.photo = undefined;
                 res.json(result);
             });
         });
+    });
+}
+
+exports.blogPhoto = (req, res, next) => {
+    const slug = req.params.slug.toLowerCase();
+
+    Blog.findOne({ slug })
+    .select('photo')
+    .exec((err, blog) => {
+        if (err || !blog) {
+            return res.status(400).json({
+                error: errorHandler(err)
+            });
+        }
+
+        res.set('Content-Type', blog.photo.contentType);
+        return res.send(blog.photo.data);
     });
 }
 

@@ -27,5 +27,6 @@ router.put(
     authController.adminMiddleware,  
     blogController.updateBlog
 );
+router.get('/blog/photo/:slug', blogController.blogPhoto);
 
 module.exports = router;
