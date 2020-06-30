@@ -1,1 +1,1 @@
-self.__BUILD_MANIFEST = (function(a,b){return {"/admin/crud/blog":[a,b],"/admin/crud/category-tag":[a,b]}}("static\u002Fchunks\u002Fstyles.chunk.css","static\u002Fchunks\u002Fstyles.js"));self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()
+self.__BUILD_MANIFEST = (function(a,b){return {"/blogs":[a,b],"/signin":[a,b]}}("static\u002Fchunks\u002Fstyles.chunk.css","static\u002Fchunks\u002Fstyles.js"));self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()

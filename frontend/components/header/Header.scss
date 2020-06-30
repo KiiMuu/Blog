@@ -8,10 +8,11 @@
 
 .header {
     background: #fff;
-    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.09);
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.06);
     .logo {
         color: $darkColor;
         font-size: 18px;
+        font-weight: 600;
     }
     .navLink {
         @include linkHoverEffect;

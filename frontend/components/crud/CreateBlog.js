@@ -170,7 +170,6 @@ const CreateBlog = ({ router }) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log('Blog published!');
 
         createBlog(formData, token).then(data => {
             if (data.error) {

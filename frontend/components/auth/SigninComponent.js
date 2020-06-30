@@ -74,7 +74,7 @@ const SigninComponent = () => {
             <div className="signin-form">
                 <div className="form-heading uk-text-center">
                     <h2 className="uk-text-uppercase">Signin</h2>
-                    <p className="uk-text-muted">Login with a your current account</p>
+                    <p className="uk-text-muted">Login with your current account</p>
                 </div>
                 {showError()}
                 {showMessage()}

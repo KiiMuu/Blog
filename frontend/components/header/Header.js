@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Router from 'next/router';
 import './Header.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSignInAlt, faUserPlus, faSignOutAlt, faTachometerAlt } from '@fortawesome/free-solid-svg-icons';
+import { faSignInAlt, faUserPlus, faSignOutAlt, faTachometerAlt, faBlog } from '@fortawesome/free-solid-svg-icons';
 import { signout, isAuth } from '../../actions/auth';
 
 import NProgress from 'nprogress';
@@ -27,6 +27,11 @@ const Header = () => {
                         </div>
                         <div className="uk-navbar-right">
                             <ul className="uk-navbar-nav uk-visible@s">
+                                <li className="navLink">
+                                    <Link href="/blogs">
+                                        <a>Blogs <span><FontAwesomeIcon icon={faBlog} /></span></a>
+                                    </Link>
+                                </li>
                                 {!isAuth() && <Fragment>
                                     <li className="navLink">
                                         <Link href="/signup">
