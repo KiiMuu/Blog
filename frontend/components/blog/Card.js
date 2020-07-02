@@ -26,7 +26,16 @@ const Card = ({ blog }) => {
     return (
         <div className="blog-item uk-margin-small-top">
             <header>
-                <div className="blog-image">Blog image</div>
+                <div className="blog-image">
+                    <section>
+                        <img 
+                            src={`${API}/blog/photo/${blog.slug}`} 
+                            alt={blog.title} 
+                            draggable="false" 
+                            // style={{ maxHeight: '250px' }}
+                        />
+                    </section>
+                </div>
             </header>
             <section className="blog-content">
                 <div className="blog-title">

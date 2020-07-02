@@ -34,22 +34,29 @@
                 }
                 &:first-child {
                     margin-bottom: 5px;
-                    color: #6c5ce7;
+                    color: #7d5fff;
                 }
                 &:last-child {
-                    color: #00cec9;
+                    color: #17c0eb;
                 }
             }
         }
         .blog-tags-cats {
             margin-top: 15px;
             margin-bottom: 15px;
+            .cats {
+                a {
+                    background: #7d5fff;
+                }
+            }
             .tags {
                 margin-top: 15px;
+                a {
+                    background: #17c0eb;
+                }
             }
             a {
                 margin-right: 10px;
-                background: #3B3B98;
                 color: $lightColor;
                 text-decoration: none;
                 border-radius: 2px;
