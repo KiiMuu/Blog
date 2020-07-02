@@ -17,9 +17,10 @@
             a {
                 text-decoration: none;
                 h2 {
-                    color: $darkColor;
+                    color: #000;
                     margin-bottom: 10px;
                     font-size: 23px;
+                    font-weight: 600;
                 }
             }
         }
@@ -42,6 +43,18 @@
         }
         .blog-tags-cats {
             margin-top: 15px;
+            margin-bottom: 15px;
+            .tags {
+                margin-top: 15px;
+            }
+            a {
+                margin-right: 10px;
+                background: #3B3B98;
+                color: $lightColor;
+                text-decoration: none;
+                border-radius: 2px;
+                padding: 5px 10px;
+            }
         }
         .blog-excerpt {
             p {

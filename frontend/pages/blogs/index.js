@@ -1,14 +1,9 @@
 import { useState } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
 import './index.scss';
 import Layout from '../../components/layout/Layout';
 import { blogsWithCategoriesAndTags } from '../../actions/blog';
-import { API } from '../../config';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import renderHTML from 'react-render-html';
-import moment from 'moment';
+import Card from '../../components/blog/Card';
 
 const Blogs = ({ blogs, categories, tags, size }) => {
 
@@ -16,31 +11,7 @@ const Blogs = ({ blogs, categories, tags, size }) => {
         return blogs.map((blog, i) => {
             return (
                 <article className="uk-width-1-3@l uk-width-1-2@m uk-width-1-1" key={i}>
-                    <div className="blog-item uk-margin-small-top">
-                        <header>
-                            <div className="blog-image">Blog image</div>
-                        </header>
-                        <section className="blog-content">
-                            <div className="blog-title">
-                                <Link href={`/blogs/${blog.slug}`}>
-                                    <a><h2>{blog.title}</h2></a>
-                                </Link>
-                            </div>
-                            <div className="creator">
-                                <p><span>Blogger</span>: {blog.postedBy.name}</p>
-                                <p>Published {moment(blog.createdAt).fromNow()}</p>
-                            </div>
-                            <div className="blog-tags-cats">
-                                <p>blog tags and cats</p>
-                            </div>
-                            <div className="blog-excerpt">
-                                <p>{renderHTML(blog.excerpt)}</p>
-                                <Link href={`/blogs/${blog.slug}`}>
-                                    <a>Read More <span><FontAwesomeIcon icon={faArrowRight} /></span></a>
-                                </Link>
-                            </div>
-                        </section>
-                    </div>
+                    <Card blog={blog} />
                 </article>
             );
         });
