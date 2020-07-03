@@ -4,8 +4,25 @@ import './index.scss';
 import Layout from '../../components/layout/Layout';
 import { blogsWithCategoriesAndTags } from '../../actions/blog';
 import Card from '../../components/blog/Card';
+import Link from 'next/link';
 
 const Blogs = ({ blogs, categories, tags, size }) => {
+
+    const showAllCategories = () => {
+        return categories.map((category, i) => (
+            <Link href={`/categories/${category.slug}`} key={i}>
+                <a>{category.name}</a>
+            </Link>
+        ));
+    }
+
+    const showAllTags = () => {
+        return tags.map((tag, i) => (
+            <Link href={`/tags/${tag.slug}`} key={i}>
+                <a>#{tag.name}</a>
+            </Link>
+        ));
+    }
 
     const showAllBlogs = () => {
         return blogs.map((blog, i) => {
@@ -21,18 +38,29 @@ const Blogs = ({ blogs, categories, tags, size }) => {
         <Layout>
             <main>
                 <div className="uk-container">
-                    <div className="categoreis_tags-content uk-margin-medium-top">
-                        <header>
-                            <div className="heading">
-                                <h2 className="uk-text-uppercase uk-text-center">Programming Blogs and Tutorials</h2>
+                    <div data-uk-grid>
+                        <div className="uk-width-1-1">
+                            <div className="categoreis_tags-content uk-margin-medium-top">
+                                <header>
+                                    <div className="heading">
+                                        <h2 className="uk-text-uppercase uk-text-center uk-margin-medium-bottom">Programming Blogs and Tutorials</h2>
+                                    </div>
+                                    <section>
+                                        <div className="cats">
+                                            {showAllCategories()}
+                                        </div>
+                                        <div className="tags">
+                                            {showAllTags()}
+                                        </div>
+                                    </section>
+                                </header>
                             </div>
-                            <section>
-                                <p>Show cats and tags</p>
-                            </section>
-                        </header>
-                    </div>
-                    <div className="uk-grid-small" data-uk-grid>
-                        {showAllBlogs()}
+                        </div>
+                        <div className="uk-width-1-1">
+                            <div className="uk-grid-small" data-uk-grid>
+                                {showAllBlogs()}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </main>

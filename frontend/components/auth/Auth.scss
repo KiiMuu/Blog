@@ -20,11 +20,13 @@
         max-width: 400px;
     }
     .signup-form, .signin-form {
-        background: #fff;
+        background: #FFFFFF;
+        background: -webkit-linear-gradient(to right, #FFFFFF, $lightColor);
+        background: linear-gradient(to right, #FFFFFF, $lightColor);
         margin-top: 50px;
         padding: 50px;
-        border-radius: 5px 50px 20px 50px;
-        box-shadow: 0 0 30px 0px rgba(0, 0, 0, 0.10);
+        border-radius: 2px;
+        box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.08);
         .form-heading {
             h2 {
                 margin: 0;
