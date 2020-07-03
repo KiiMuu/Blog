@@ -99,6 +99,8 @@
         .blog-excerpt {
             p {
                 margin-bottom: 10px;
+                max-height: 50px; 
+                overflow: hidden;
             }
             a {
                 color: $mainColor;
@@ -117,5 +119,15 @@
                 }
             }
         }
+    }
+}
+
+
+// single blog
+.blog-img {
+    img {
+        width: 100%;
+        max-height: 500px;
+        object-fit: cover;
     }
 }
