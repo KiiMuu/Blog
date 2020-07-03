@@ -20,12 +20,6 @@
     "/_polyfills": [
       "static/runtime/polyfills.js"
     ],
-    "/admin/crud/blog": [
-      "static/runtime/webpack.js",
-      "static/chunks/styles.chunk.css",
-      "static/chunks/styles.js",
-      "static/runtime/main.js"
-    ],
     "/blogs": [
       "static/runtime/webpack.js",
       "static/chunks/styles.chunk.css",
