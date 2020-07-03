@@ -8,7 +8,7 @@ import Card from '../../components/blog/Card';
 import Link from 'next/link';
 import { APP_NAME, API, DOMAIN, FB_APP_ID } from "../../config";
 
-const Blogs = ({ blogs, categories, tags, size, router }) => {
+const Blogs = ({ blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, router }) => {
 
     const head = () => (
         <Head>
@@ -33,6 +33,34 @@ const Blogs = ({ blogs, categories, tags, size, router }) => {
         </Head>
     )
 
+    const [limit, setLimit] = useState(blogsLimit);
+    const [skip, setSkip] = useState(0);
+    const [size, setSize] = useState(totalBlogs);
+    const [loadedBlogs, setLoadedBlogs] = useState([]);
+
+    const loadMore = () => {
+        let toSkip = skip + limit;
+
+        blogsWithCategoriesAndTags(toSkip, limit).then(data => {
+            if (data.error) {
+                console.log(data.error);
+            } else {
+                setLoadedBlogs([
+                    ...loadedBlogs,
+                    ...data.blogs
+                ]);
+                setSize(data.size);
+                setSkip(toSkip);
+            }
+        });
+    }
+
+    const loadMoreButton = () => {
+        return (
+            size > 0 && size >= limit && (<button onClick={loadMore}>Show more blog</button>)
+        )
+    }
+
     const showAllCategories = () => {
         return categories.map((category, i) => (
             <Link href={`/categories/${category.slug}`} key={i}>
@@ -56,6 +84,14 @@ const Blogs = ({ blogs, categories, tags, size, router }) => {
                     <Card blog={blog} />
                 </article>
             );
+        });
+    }
+
+    const showLoadedBlogs = () => {
+        return loadedBlogs.map((blog, i) => {
+            return <article className="uk-width-1-3@l uk-width-1-2@m uk-width-1-1" key={i}>
+                <Card blog={blog} />
+            </article>
         });
     }
 
@@ -86,7 +122,11 @@ const Blogs = ({ blogs, categories, tags, size, router }) => {
                             <div className="uk-width-1-1">
                                 <div className="uk-grid-small" data-uk-grid>
                                     {showAllBlogs()}
+                                    {showLoadedBlogs()}
                                 </div>
+                            </div>
+                            <div className="loadmore-btn uk-text-center">
+                                {loadMoreButton()}
                             </div>
                         </div>
                     </div>
@@ -97,7 +137,11 @@ const Blogs = ({ blogs, categories, tags, size, router }) => {
 }
 
 Blogs.getInitialProps = () => {
-    return blogsWithCategoriesAndTags().then(data => {
+
+    let skip = 0;
+    let limit = 3;
+
+    return blogsWithCategoriesAndTags(skip, limit).then(data => {
         if (data.error) {
             console.log(data.error);
         } else {
@@ -105,7 +149,9 @@ Blogs.getInitialProps = () => {
                 blogs: data.blogs,
                 categories: data.categories,
                 tags: data.tags,
-                size: data.size
+                totalBlogs: data.size,
+                blogsLimit: limit,
+                blogSkip: skip
             }
         }
     });
