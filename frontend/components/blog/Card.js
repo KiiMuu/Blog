@@ -32,28 +32,15 @@ const Card = ({ blog }) => {
                             src={`${API}/blog/photo/${blog.slug}`} 
                             alt={blog.title} 
                             draggable="false" 
-                            // style={{ maxHeight: '250px' }}
                         />
                     </section>
                 </div>
             </header>
-            <section className="blog-content">
-                <div className="blog-title">
+            <section className="card-content">
+                <div className="card-title">
                     <Link href={`/blogs/${blog.slug}`}>
                         <a><h2>{blog.title}</h2></a>
                     </Link>
-                </div>
-                <div className="creator">
-                    <p><span>Blogger</span>: {blog.postedBy.name}</p>
-                    <p>Published {moment(blog.createdAt).fromNow()}</p>
-                </div>
-                <div className="blog-tags-cats">
-                    <div className="cats">
-                        <div>{showBlogCategories(blog)}</div>
-                    </div>
-                    <div className="tags">
-                        <div>{showBlogTags(blog)}</div>
-                    </div>
                 </div>
                 <div className="blog-excerpt">
                     <p>{renderHTML(blog.excerpt)}</p>

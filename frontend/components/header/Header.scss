@@ -7,7 +7,7 @@
 }
 
 .header {
-    background: #fff;
+    @include gradientBG;
     box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.06);
     .logo {
         color: $darkColor;

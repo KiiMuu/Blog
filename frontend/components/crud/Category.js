@@ -43,7 +43,7 @@ const Category = () => {
         }
 
         return categories.map((category, i) => {
-            return <button className="category-name" onDoubleClick={() => handleDelete(category.slug)} title="Double click to delete" key={i}>#{category.name}</button>
+            return <button className="category-name" onDoubleClick={() => handleDelete(category.slug)} title="Double click to delete" key={i}>{category.name}</button>
         });
     }
 

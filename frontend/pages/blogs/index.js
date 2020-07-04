@@ -6,6 +6,8 @@ import Layout from '../../components/layout/Layout';
 import { blogsWithCategoriesAndTags } from '../../actions/blog';
 import Card from '../../components/blog/Card';
 import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { APP_NAME, API, DOMAIN, FB_APP_ID } from "../../config";
 
 const Blogs = ({ blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, router }) => {
@@ -57,14 +59,14 @@ const Blogs = ({ blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, rout
 
     const loadMoreButton = () => {
         return (
-            size > 0 && size >= limit && (<button onClick={loadMore}>Show more blog</button>)
+            size > 0 && size >= limit && (<div className="load-more"><a onClick={loadMore} className="uk-text-uppercase">Show more <span><FontAwesomeIcon icon={faArrowRight} /></span></a></div>)
         )
     }
 
     const showAllCategories = () => {
         return categories.map((category, i) => (
             <Link href={`/categories/${category.slug}`} key={i}>
-                <a>{category.name}</a>
+                <a title={`${category.name} category`}>{category.name}</a>
             </Link>
         ));
     }
@@ -72,7 +74,7 @@ const Blogs = ({ blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, rout
     const showAllTags = () => {
         return tags.map((tag, i) => (
             <Link href={`/tags/${tag.slug}`} key={i}>
-                <a>#{tag.name}</a>
+                <a title={`${tag.name} tag`}>#{tag.name}</a>
             </Link>
         ));
     }
@@ -110,10 +112,10 @@ const Blogs = ({ blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, rout
                                         </div>
                                         <section>
                                             <div className="cats">
-                                                {showAllCategories()}
+                                                {categories.length === 0 ? <div className="no-cats">There're no categories were added yet.</div> : showAllCategories()}
                                             </div>
                                             <div className="tags">
-                                                {showAllTags()}
+                                                {tags.length === 0 ? <div className="no-tags">There're no tags were added yet.</div> : showAllTags()}
                                             </div>
                                         </section>
                                     </header>

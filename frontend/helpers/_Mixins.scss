@@ -15,3 +15,30 @@
         opacity: 1;
     }
 }
+
+// show arrow
+@mixin arrowEffect {
+    a {
+        color: $mainColor;
+        text-decoration: none;
+        span {
+            font-size: 13px;
+            margin-left: -10px;
+            opacity: 0;
+            transition: .15s ease-in-out;
+        }
+        &:hover {
+            span {
+                opacity: 1;
+                margin-left: 5px;
+            }
+        }
+    }
+}
+
+// gradient bg
+@mixin gradientBG {
+    background: #FFFFFF;
+    background: -webkit-linear-gradient(to right, #FFFFFF, $lightColor);
+    background: linear-gradient(to right, #FFFFFF, $lightColor);
+}

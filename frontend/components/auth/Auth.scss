@@ -1,4 +1,5 @@
 @import '../../helpers/Variables';
+@import '../../helpers/Mixins';
 
 .error {
     color: #a94442;
@@ -20,9 +21,7 @@
         max-width: 400px;
     }
     .signup-form, .signin-form {
-        background: #FFFFFF;
-        background: -webkit-linear-gradient(to right, #FFFFFF, $lightColor);
-        background: linear-gradient(to right, #FFFFFF, $lightColor);
+        @include gradientBG;
         margin-top: 50px;
         padding: 50px;
         border-radius: 2px;

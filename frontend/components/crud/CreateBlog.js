@@ -270,7 +270,7 @@ const CreateBlog = ({ router }) => {
                         <h5 className="uk-text-uppercase">Featured image</h5>
                         <small>Max size: 1MB</small>
                         <div data-uk-form-custom>
-                            <input onChange={handleChange('photo')} type="file" accept="image/*" />
+                            <input onChange={handleChange('photo')} type="file" accept="image/*" required />
                             <button className="uk-button uk-button-default" type="button" tabIndex="-1">Select</button>
                         </div>
                     </div>
