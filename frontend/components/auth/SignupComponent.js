@@ -73,6 +73,7 @@ const SignupComponent = () => {
     const signupForm = () => {
         return (
             <div className="signup-form">
+                {showLoading()}
                 <div className="form-heading uk-text-center">
                     <h2 className="uk-text-uppercase">Signup</h2>
                     <p className="uk-text-muted">Register with a new account</p>
@@ -168,7 +169,6 @@ const SignupComponent = () => {
         <div className="signup">
             <div className="uk-container uk-container-small">
                 <div className="uk-child-width-1-1@m uk-flex uk-flex-stretch" data-uk-grid>
-                    {showLoading()}
                     {showForm &&  signupForm()}
                 </div>
             </div>

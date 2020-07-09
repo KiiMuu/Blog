@@ -48,7 +48,7 @@ const Category = () => {
     }
 
     const handleDelete = slug => {
-        let answer = window.confirm('Are you sure you want to delete?');
+        let answer = window.confirm('Are you sure you want to delete????');
 
         if (answer) {
             removeCategory(slug, token).then(data => {

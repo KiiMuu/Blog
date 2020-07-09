@@ -1,17 +1,34 @@
-import { useState, Fragment } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import Head from 'next/head';
 import './index.scss';
 import Layout from '../../components/layout/Layout';
-import { readBlog } from '../../actions/blog';
+import { readBlog, relatedBlogs } from '../../actions/blog';
 import Link from 'next/link';
 import moment from 'moment';
 import renderHTML from 'react-render-html';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faClock } from '@fortawesome/free-solid-svg-icons';
 import { APP_NAME, API, DOMAIN, FB_APP_ID } from "../../config";
+import SmallCard from '../../components/blog/SmallCard';
 
 
 const singleBlog = ({ blog, query }) => {
+
+    const [related, setRelated] = useState([]);
+
+    const loadRelatedBlogs = () => {
+        relatedBlogs({ blog }).then(data => {
+            if (data.error) {
+                console.log(data.error);
+            } else {
+                setRelated(data);
+            }
+        });
+    }
+
+    useEffect(() => {
+        loadRelatedBlogs();
+    }, []);
 
     const head = () => (
         <Head>
@@ -52,6 +69,14 @@ const singleBlog = ({ blog, query }) => {
         ));
     }
 
+    const showRelatedBlogs = () => {
+        return related.map((blog, i) => {
+            return <article className="uk-width-1-3@l uk-width-1-2@m uk-width-1-1" key={i}>
+                <SmallCard blog={blog} />
+            </article>
+        });
+    }
+
     return <Fragment>
         {head()}
         <Layout>
@@ -87,8 +112,8 @@ const singleBlog = ({ blog, query }) => {
                                         {renderHTML(blog.body)}
                                     </div>
                                     <div className="related-blogs">
-                                        <h4>Related Blogs</h4>
-                                        <p>show related blogs</p>
+                                        <h4 className="uk-text-uppercase">Related Blogs</h4>
+                                        <div data-uk-grid>{showRelatedBlogs()}</div>
                                     </div>
                                     <div className="blog-comments">
                                         <p>blog comments</p>

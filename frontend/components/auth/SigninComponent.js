@@ -72,6 +72,7 @@ const SigninComponent = () => {
     const signinForm = () => {
         return (
             <div className="signin-form">
+                {showLoading()}
                 <div className="form-heading uk-text-center">
                     <h2 className="uk-text-uppercase">Signin</h2>
                     <p className="uk-text-muted">Login with your current account</p>
@@ -146,7 +147,6 @@ const SigninComponent = () => {
         <div className="signin">
             <div className="uk-container uk-container-small">
                 <div className="uk-child-width-1-1@m uk-flex uk-flex-stretch" data-uk-grid>
-                    {showLoading()}
                     {showForm &&  signinForm()}
                 </div>
             </div>

@@ -1,9 +1,8 @@
 import { Fragment } from 'react';
+import './Spinner.scss';
 
 export default () => (
     <Fragment>
-        <div uk-spinner="true"
-            style={{ margin: 'auto', display: 'block' }}
-        >Spinner</div>
+        <span className="loading">Loading...</span>
     </Fragment>
 );
