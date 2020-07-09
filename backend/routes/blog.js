@@ -28,5 +28,5 @@ router.put(
     blogController.updateBlog
 );
 router.get('/blog/photo/:slug', blogController.blogPhoto);
-
+router.post('/blogs/relate', blogController.relatedBlogs);
 module.exports = router;
