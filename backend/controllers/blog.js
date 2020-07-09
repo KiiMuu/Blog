@@ -302,11 +302,11 @@ exports.relatedBlogs = (req, res, next) => {
 
     Blog.find({ 
         _id: {
-            $ne: _id, // ne => not equal
-            categories: {
-                $in: categories
-            }
-        } 
+            $ne: _id, // ne => not equa
+        },
+        categories: {
+            $in: categories
+        }
     })
     .limit(limit)
     .populate('postedBy', '_id name profile')
