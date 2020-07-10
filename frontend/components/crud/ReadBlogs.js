@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Router from 'next/router';   
 import './Crud.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
 import { getCookie, isAuth } from '../../actions/auth';
 import { listBlogs, removeBlog } from '../../actions/blog';
@@ -60,10 +60,29 @@ const ReadBlogs = () => {
         });
     }
 
+    const handleMouseMove = () => {
+        setMessage('');
+    }
+
+    const showSuccess = () => {
+        if (message) {
+            return (
+                <div className="alert-message" style={{width: '100%'}} onMouseMove={handleMouseMove}>
+                    <p 
+                        className="message success"
+                        style={{
+                            opacity: message ? '1' : '0'
+                        }}
+                    >{message && <span>{message} <FontAwesomeIcon icon={faCheckCircle} /></span>}</p>
+                </div>
+            )
+        }
+    }
+
     return (
         <Fragment>
-            <div>{message && <div>{message}</div>}</div>
-            {showAllBlog()}
+            {showSuccess()}
+            {blogs.length === 0 ? <div>There're no blogs to manage</div> : showAllBlog()}
         </Fragment>
     )
 }

@@ -1,4 +1,5 @@
 @import '../../helpers/Variables';
+@import '../../helpers/Mixins';
 
 // Category.js && Tag.js
 .form-inputs {
@@ -193,6 +194,36 @@
     }
     to {
         transform: scale(1, 1);
+    }
+}
+
+// ReadBlogs.js
+.blog-content {
+    padding: 30px;
+    @include gradientBG;
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.06);
+    border-radius: 2px;
+    h3 {
+        color: #000;
+        margin-bottom: 10px;
+    }
+    p {
+        margin: 0 0 10px 0;
+        // &:first-child {
+        //     color: #7d5fff;
+        // }
+        // &:last-child {
+        //     color: #17c0eb;
+        // }
+    }
+    button {
+        margin-top: 20px;
+        background:#ebdede;
+        border: none;
+        color: #f0506e;
+        padding: 5px 10px;
+        cursor: pointer;
+        outline: none;
     }
 }
 
