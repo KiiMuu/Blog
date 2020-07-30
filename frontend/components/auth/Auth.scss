@@ -96,7 +96,7 @@
                         color: $mainColor;
                         margin-left: -15px;
                         opacity: 0;
-                        transition: .2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+                        transition: .2s ease-in-out;
                     }
                     a:hover + span{
                         margin-left: 5px;

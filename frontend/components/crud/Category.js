@@ -1,6 +1,4 @@
 import { useState, useEffect, Fragment } from 'react';
-import Link from 'next/link';
-import Router from 'next/router';
 import './Crud.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle, faTrash, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';

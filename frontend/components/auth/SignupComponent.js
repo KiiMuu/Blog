@@ -88,7 +88,7 @@ const SignupComponent = () => {
                                     style={{
                                         opacity: (isTyped && document.activeElement.id === 'name') ? '1' : '0',
                                         left: isTyped ? '0' : '', 
-                                        transition: '.2s cubic-bezier(0.68, -0.55, 0.27, 1.55)'
+                                        transition: '.2s ease-in-out'
                                     }}
                                 >Name</label>
                                 <input 
@@ -109,7 +109,7 @@ const SignupComponent = () => {
                                     style={{
                                         opacity: (isTyped && document.activeElement.id === 'email') ? '1' : '0',
                                         left: isTyped ? '0' : '', 
-                                        transition: '.2s cubic-bezier(0.68, -0.55, 0.27, 1.55)'
+                                        transition: '.2s ease-in-out'
                                     }}
                                 >Email</label>
                                 <input 
@@ -130,7 +130,7 @@ const SignupComponent = () => {
                                     style={{
                                         opacity: (isTyped && document.activeElement.id === 'password') ? '1' : '0',
                                         left: isTyped ? '0' : '', 
-                                        transition: '.2s cubic-bezier(0.68, -0.55, 0.27, 1.55)'
+                                        transition: '.2s ease-in-out'
                                     }}
                                 >Password</label>
                                 <input 

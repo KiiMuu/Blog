@@ -39,6 +39,6 @@
 // gradient bg
 @mixin gradientBG {
     background: #FFFFFF;
-    background: -webkit-linear-gradient(to right, #FFFFFF, $lightColor);
-    background: linear-gradient(to right, #FFFFFF, $lightColor);
+    // background: -webkit-linear-gradient(to right, #FFFFFF, $lightColor);
+    // background: linear-gradient(to right, #FFFFFF, $lightColor);
 }

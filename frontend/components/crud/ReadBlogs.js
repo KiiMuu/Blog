@@ -1,12 +1,11 @@
 import { useState, useEffect, Fragment } from 'react';
-import Link from 'next/link';
-import Router from 'next/router';   
 import './Crud.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faCheckCircle, faPen } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
 import { getCookie, isAuth } from '../../actions/auth';
 import { listBlogs, removeBlog } from '../../actions/blog';
+import Link from 'next/link';
 
 const ReadBlogs = () => {
 
@@ -43,6 +42,22 @@ const ReadBlogs = () => {
         }
     }
 
+    const showUpdateButton = blog => {
+        if (isAuth() && isAuth().role === 0) {
+            return (
+                <Link href={`/user/crud/${blog.slug}`}>
+                    <button><FontAwesomeIcon icon={faPen} /></button>
+                </Link>
+            )
+        } else if (isAuth() && isAuth().role === 1) {
+            return (
+                <Link href={`/admin/crud/${blog.slug}`}>
+                    <button><FontAwesomeIcon icon={faPen} /></button>
+                </Link>
+            )
+        }
+    }
+
     const showAllBlog = () => {
         return blogs.map((blog, i) => {
             return (
@@ -52,7 +67,8 @@ const ReadBlogs = () => {
                         <p>Written by {blog.postedBy.name}</p>
                         <p>Published on {moment(blog.updatedAt).fromNow()}</p>
                         <div className="blog-control">
-                            <button onClick={() => deleteBlog(blog.slug)}><FontAwesomeIcon icon={faTrash} /></button>
+                            <button className="uk-margin-small-right" onClick={() => deleteBlog(blog.slug)}><FontAwesomeIcon icon={faTrash} /></button>
+                            {showUpdateButton(blog)}
                         </div>
                     </div>
                 </div>

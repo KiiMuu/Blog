@@ -1,8 +1,6 @@
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import renderHTML from 'react-render-html';
-import { API } from '../../config';
 
 const SmallCard = ({ blog }) => {
     return (

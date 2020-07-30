@@ -8,7 +8,7 @@ import Card from '../../components/blog/Card';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { APP_NAME, API, DOMAIN, FB_APP_ID } from "../../config";
+import { APP_NAME, DOMAIN, FB_APP_ID } from "../../config";
 
 const Blogs = ({ blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, router }) => {
 

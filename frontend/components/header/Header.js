@@ -3,8 +3,6 @@ import { APP_NAME } from '../../config';
 import Link from 'next/link';
 import Router from 'next/router';
 import './Header.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSignInAlt, faUserPlus, faSignOutAlt, faTachometerAlt, faBlog } from '@fortawesome/free-solid-svg-icons';
 import { signout, isAuth } from '../../actions/auth';
 
 import NProgress from 'nprogress';
@@ -29,34 +27,34 @@ const Header = () => {
                             <ul className="uk-navbar-nav uk-visible@s">
                                 <li className="navLink">
                                     <Link href="/blogs">
-                                        <a>Blogs <span><FontAwesomeIcon icon={faBlog} /></span></a>
+                                        <a>Blogs</a>
                                     </Link>
                                 </li>
                                 {!isAuth() && <Fragment>
                                     <li className="navLink">
                                         <Link href="/signup">
-                                            <a>SignUp <span><FontAwesomeIcon icon={faUserPlus} /></span></a>
+                                            <a>SignUp</a>
                                         </Link>
                                     </li>
                                     <li className="navLink">
                                         <Link href="/signin">
-                                            <a>SignIn <span><FontAwesomeIcon icon={faSignInAlt} /></span></a>
+                                            <a>SignIn</a>
                                         </Link>
                                     </li>
                                 </Fragment>}
                                 {isAuth() && isAuth().role === 0 && (
                                     <li className="navLink">
-                                        <a href="/user">Dashboard <span><FontAwesomeIcon icon={faTachometerAlt} /></span></a>
+                                        <a href="/user">Dashboard</a>
                                     </li>
                                 )}
                                 {isAuth() && isAuth().role === 1 && (
                                     <li className="navLink">
-                                        <a href="/admin">Dashboard <span><FontAwesomeIcon icon={faTachometerAlt} /></span></a>
+                                        <a href="/admin">Dashboard</a>
                                     </li>
                                 )}
                                 {isAuth() && (
                                     <li className="navLink">
-                                        <a onClick={() => signout(() => {Router.replace('/signin')})}>SignOut <span><FontAwesomeIcon icon={faSignOutAlt} /></span></a>
+                                        <a onClick={() => signout(() => {Router.replace('/signin')})}>SignOut</a>
                                     </li>
                                 )}
                             </ul>

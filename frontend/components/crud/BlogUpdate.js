@@ -1,46 +1,35 @@
 import { useState, useEffect } from 'react';  
 import dynamic from 'next/dynamic';
 import { withRouter } from 'next/router';
+import Router from 'next/router';
 import './Crud.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
-import { getCookie } from '../../actions/auth';
-import { createBlog } from '../../actions/blog';
+import { getCookie, isAuth } from '../../actions/auth';
+import { readBlog, updateBlog } from '../../actions/blog';
 import { getCategories } from '../../actions/category';
 import { getTags } from '../../actions/tag';
 const ReactQuill = dynamic(() => import('react-quill'), {ssr: false});
 import '../../node_modules/react-quill/dist/quill.snow.css';
 import { QuillModules, QuillFormats } from '../../helpers/quil';
 
-const CreateBlog = ({ router }) => {
+const BlogUpdate = ({ router }) => {
 
-    // get blog from localStorage && set it as initial state to body
-    const blogFromLS = () => {
-        if (typeof window === 'undefined') return false;
-
-        if (localStorage.getItem('blog')) {
-            return JSON.parse(localStorage.getItem('blog'));
-        } else {
-            return false;
-        }
-    }
-
-    // initial states
-    const [body, setBody] = useState(blogFromLS());
-    const [values, setValues] = useState({
-        error: '',
-        sizeError: '',
-        success: '',
-        formData: '',
-        title: '',
-        hidePublishButton: false
-    });
+    const [body, setBody] = useState('');
     const [categories, setCategories] = useState([]);
     const [tags, setTags] = useState([]);
     const [checkedCat, setCheckedCat] = useState([]);
     const [checkedTag, setCheckedTag] = useState([]);
+    const [values, setValues] = useState({
+        title: '',
+        error: '',
+        success: '',
+        formData: '',
+        title: '',
+        body: ''
+    });
 
-    const { error, sizeError, success, formData, title, hidePublishButton } = values;
+    const { error, success, formData, title } = values;
     const token = getCookie('token');
 
     useEffect(() => {
@@ -48,6 +37,7 @@ const CreateBlog = ({ router }) => {
             ...values,
             formData: new FormData()
         });
+        initBlog();
         initialCategories();
         initialTags();
     }, [router]);
@@ -77,28 +67,6 @@ const CreateBlog = ({ router }) => {
                 setTags(data);
             }
         });
-    }
-
-    // evenet handlers
-    const handleChange = name => e => {
-        const value = name === 'photo' ? e.target.files[0] : e.target.value;
-        formData.set(name, value);
-
-        setValues({
-            ...values,
-            [name]: value,
-            formData,
-            error: ''
-        });
-    }
-
-    const handleBody = e => {
-        setBody(e);
-        formData.set('body', e);
-        
-        if (typeof window !== 'undefined') {
-            localStorage.setItem('blog', JSON.stringify(e));
-        }
     }
 
     const handleCatToggle = category => () => {
@@ -143,12 +111,32 @@ const CreateBlog = ({ router }) => {
         formData.set('tags', all);
     }
 
+    const findOutCategory = category => {
+        const result = checkedCat.indexOf(category);
+
+        if (result !== -1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    const findOutTag = tag => {
+        const result = checkedTag.indexOf(tag);
+
+        if (result !== -1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // show categories and tags
     const showCategories = () => {
         return (
             categories && categories.map((category, i) => (
                 <span key={i}>
-                    <input onChange={handleCatToggle(category._id)} type="checkbox" className="uk-checkbox" />
+                    <input onChange={handleCatToggle(category._id)} checked={findOutCategory(category._id)} type="checkbox" className="uk-checkbox" />
                     <label>{category.name}</label>
                 </span>
             ))
@@ -159,17 +147,67 @@ const CreateBlog = ({ router }) => {
         return (
             tags && tags.map((tag, i) => (
                 <span key={i}>
-                    <input onChange={handleTagToggle(tag._id)} type="checkbox" className="uk-checkbox" />
+                    <input onChange={handleTagToggle(tag._id)} checked={findOutTag(tag._id)} type="checkbox" className="uk-checkbox" />
                     <label>{tag.name}</label>
                 </span>
             ))
         );
     }
 
-    const handleSubmit = e => {
-        e.preventDefault();
+    const initBlog = () => {
+        if (router.query.slug) {
+            readBlog(router.query.slug).then(data => {
+                if (data.error) {
+                    console.log(data.error);
+                } else {
+                    setValues({
+                        ...values,
+                        title: data.title
+                    });
+                    setBody(data.body);
+                    setCategoriesArray(data.categories);
+                    setTagsArray(data.tags);
+                }
+            });
+        }
+    }
 
-        createBlog(formData, token).then(data => {
+    const setCategoriesArray = blogCats => {
+        let ca = [];
+        blogCats.map((blogCat, i) => {
+            ca.push(blogCat._id);
+        });
+        setCheckedCat(ca);
+    }
+
+    const setTagsArray = blogTags => {
+        let tag = [];
+        blogTags.map((blogTag, i) => {
+            tag.push(blogTag._id);
+        });
+        setCheckedTag(tag);
+    }
+
+    const handleChange = name => e => {
+        const value = name === 'photo' ? e.target.files[0] : e.target.value;
+        formData.set(name, value);
+
+        setValues({
+            ...values,
+            [name]: value,
+            formData,
+            error: ''
+        });
+    }
+
+    const handleBody = e => {
+        setBody(e);
+        formData.set('body', e);
+    }
+
+    const editBlog = e => {
+        e.preventDefault();
+        updateBlog(formData, token, router.query.slug).then(data => {
             if (data.error) {
                 setValues({
                     ...values,
@@ -179,12 +217,16 @@ const CreateBlog = ({ router }) => {
                 setValues({
                     ...values,
                     title: '',
-                    error: '',
-                    success: `A new blog titled "${data.title}" is created`
+                    success: `Blog titled "${data.title}" is updated`
                 });
-                setBody('');
-                setCategories([]);
-                setTags([]);
+
+                if (isAuth() && isAuth().role === 1) {
+                    // Router.replace(`/admin/crud/${router.query.slug}`);
+                    Router.replace(`/admin`);
+                } else if (isAuth() && isAuth().role === 0) {
+                    // Router.replace(`/user/crud/${router.query.slug}`);
+                    Router.replace(`/user`);
+                }
             }
         });
     }
@@ -228,9 +270,9 @@ const CreateBlog = ({ router }) => {
         });
     }
 
-    const blogForm = () => {
+    const updateBlogForm = () => {
         return (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={editBlog}>
                 <div className="form-inputs">
                     <label className="uk-form-label uk-text-uppercase" htmlFor="blogTitle">Blog Title</label>
                     <div className="uk-form-controls">
@@ -254,14 +296,14 @@ const CreateBlog = ({ router }) => {
                     />
                 </div>
                 <div className="create-btn">
-                    <button className="uk-text-uppercase" type="submit">Publish</button>
+                    <button className="uk-text-uppercase" type="submit">Update</button>
                 </div>
             </form>
         );
     }
 
     return (
-        <div className="blog_creation-content">
+        <div className="blog_update-content">
             <div className="uk-grid-small" data-uk-grid>
                 <div className="uk-width-1-1">
                     <div className="featured-img">
@@ -277,7 +319,7 @@ const CreateBlog = ({ router }) => {
                     <div className="blog-form">
                         {showError()}
                         {showSuccess()}
-                        {blogForm()}
+                        {updateBlogForm()}
                     </div>
                 </div>
                 <div className="uk-width-1-2@m">
@@ -302,4 +344,4 @@ const CreateBlog = ({ router }) => {
     )
 }
 
-export default withRouter(CreateBlog);
+export default withRouter(BlogUpdate);
