@@ -29,4 +29,5 @@ router.put(
 );
 router.get('/blog/photo/:slug', blogController.blogPhoto);
 router.post('/blogs/related', blogController.relatedBlogs);
+
 module.exports = router;

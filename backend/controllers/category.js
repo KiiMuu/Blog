@@ -1,4 +1,5 @@
 const Category = require('../models/category');
+const Blog = require('../models/blog');
 const slugify = require('slugify'); // new category => new-category
 const { errorHandler } = require('../helpers/dbErrorHandler');
 
@@ -44,7 +45,23 @@ exports.readCategory = (req, res, next) => {
             });
         }
 
-        res.json(category);
+        Blog.find({ categories: category })
+        .populate('categories', '_id name slug')
+        .populate('tags', '_id name slug')
+        .populate('postedBy', '_id name')
+        .select('_id title slug excerpt categories tags postedBy createdAt updatedAt')
+        .exec((err, data) => {
+            if (err) {
+                return res.status(400).json({
+                    error: errorHandler(err)
+                });
+            }
+
+            res.json({ 
+                category,
+                blogs: data
+            });
+        });
     });
 }
 
