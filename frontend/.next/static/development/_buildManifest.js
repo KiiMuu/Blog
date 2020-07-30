@@ -1,1 +1,1 @@
-self.__BUILD_MANIFEST = (function(a,b){return {"/blogs":[a,b],"/categories/[slug]":[a,b]}}("static\u002Fchunks\u002Fstyles.chunk.css","static\u002Fchunks\u002Fstyles.js"));self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()
+self.__BUILD_MANIFEST = (function(a,b){return {"/blogs":[a,b],"/tags/[slug]":[a,b]}}("static\u002Fchunks\u002Fstyles.chunk.css","static\u002Fchunks\u002Fstyles.js"));self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()

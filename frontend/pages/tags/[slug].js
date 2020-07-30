@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Layout from '../../components/layout/Layout';
-import { getCategory } from '../../actions/category';
-import './index.scss';
+import { getTag } from '../../actions/tag';
+import '../categories/index.scss';
 import Link from 'next/link';
 import moment from 'moment';
 import renderHTML from 'react-render-html';
@@ -10,23 +10,23 @@ import { faPen, faClock } from '@fortawesome/free-solid-svg-icons';
 import { APP_NAME, API, DOMAIN, FB_APP_ID } from "../../config";
 import Card from '../../components/blog/Card';
 
-const Category = ({ category, blogs, query }) => {
+const Tag = ({ tag, blogs, query }) => {
 
     const head = () => (
         <Head>
-            <title>{category.name} | {APP_NAME}</title>
+            <title>{tag.name} | {APP_NAME}</title>
             <meta 
                 name="description" 
-                content={`Best programming tuts on ${category.name}`} 
+                content={`Best programming tuts on ${tag.name}`} 
             />
-            <link rel="canonical" href={`${DOMAIN}/categories/${query.slug}`} />
-            <meta property="og:title" content={`${category.name} | ${APP_NAME}`} />
+            <link rel="canonical" href={`${DOMAIN}/tags/${query.slug}`} />
+            <meta property="og:title" content={`${tag.name} | ${APP_NAME}`} />
             <meta 
                 property="og:description" 
-                content={`Best programming tuts on ${category.name}`}
+                content={`Best programming tuts on ${tag.name}`}
             />
             <meta property="og:type" content="website" />
-            <meta property="og:url" content={`${DOMAIN}/categories/${query.slug}`} />
+            <meta property="og:url" content={`${DOMAIN}/tags/${query.slug}`} />
             <meta property="og:site_name" content={`${APP_NAME}`} />
             <meta property="og:image" content={`${DOMAIN}/public/img/seoblog.png`} />
             <meta property="og:image:secure_url" content={`${DOMAIN}/public/img/seoblog.png`} />
@@ -42,10 +42,10 @@ const Category = ({ category, blogs, query }) => {
                 <main>
                     <div className="uk-container">
                         <header className="uk-text-center uk-margin-medium-top">
-                            <h2 className="uk-text-uppercase">{category.name}</h2>
+                            <h2 className="uk-text-uppercase">{tag.name}</h2>
                         </header>
-                        <div className="category-blogs">
-                            {blogs.length === 0 ? <div className="n-blogs">This category has no blogs yet.</div> : <div className="uk-grid-small" data-uk-grid>
+                        <div className="tag-blogs">
+                            {blogs.length === 0 ? <div className="n-blogs">This tag has no blogs yet.</div> : <div className="uk-grid-small" data-uk-grid>
                                 {blogs.map((blog, i) => {
                                     return <article className="uk-width-1-3@l uk-width-1-2@m uk-width-1-1">
                                         <Card key={i} blog={blog} />
@@ -60,13 +60,13 @@ const Category = ({ category, blogs, query }) => {
     )
 }
 
-Category.getInitialProps = ({ query }) => {
-    return getCategory(query.slug).then(data => {
+Tag.getInitialProps = ({ query }) => {
+    return getTag(query.slug).then(data => {
         if (data.error) {
             console.log(data.error);
         } else {
             return {
-                category: data.category,
+                tag: data.tag,
                 blogs: data.blogs,
                 query
             }
@@ -74,4 +74,4 @@ Category.getInitialProps = ({ query }) => {
     });
 }
 
-export default Category;
+export default Tag;
