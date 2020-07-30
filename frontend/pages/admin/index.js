@@ -23,21 +23,15 @@ const AdminIndex = () => {
                                 <div className="sidebar">
                                     <ul className="uk-list">
                                         <li>
-                                            <Link href="/admin/crud/category-tag">
-                                                <a className="uk-text-uppercase">Create Category &amp; Tag</a>
-                                            </Link>
+                                            <a href="/admin/crud/category-tag" className="uk-text-uppercase">Create Category &amp; Tag</a>
                                             <span className="uk-float-right plus"><FontAwesomeIcon icon={faPlus} /></span>
                                         </li>
                                         <li>
-                                            <Link href="/admin/crud/blog">
-                                                <a className="uk-text-uppercase">Create Blog</a>
-                                            </Link>
+                                            <a href="/admin/crud/blog" className="uk-text-uppercase">Create Blog</a>
                                             <span className="uk-float-right create-blog"><FontAwesomeIcon icon={faBlog} /></span>
                                         </li>
                                         <li>
-                                            <Link href="/admin/crud/blogs">
-                                                <a className="uk-text-uppercase">Update/Delete Blogs</a>
-                                            </Link>
+                                            <a href="/admin/crud/blogs" className="uk-text-uppercase">Update/Delete Blogs</a>
                                             <span className="uk-float-right update-blog"><FontAwesomeIcon icon={faEdit} /></span>
                                         </li>
                                     </ul>

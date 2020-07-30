@@ -91,8 +91,8 @@ const Blogs = ({ blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, rout
 
     const showLoadedBlogs = () => {
         return loadedBlogs.map((blog, i) => {
-            return <article className="uk-width-1-3@l uk-width-1-2@m uk-width-1-1" key={i}>
-                <Card blog={blog} />
+            return <article className="uk-width-1-3@l uk-width-1-2@m uk-width-1-1">
+                <Card key={i} blog={blog} />
             </article>
         });
     }
