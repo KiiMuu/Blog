@@ -26,13 +26,13 @@
     "/_polyfills": [
       "static/runtime/polyfills.js"
     ],
-    "/blogs/[slug]": [
+    "/index": [
       "static/runtime/webpack.js",
       "static/chunks/styles.chunk.css",
       "static/chunks/styles.js",
       "static/runtime/main.js"
     ],
-    "/index": [
+    "/profile/[username]": [
       "static/runtime/webpack.js",
       "static/chunks/styles.chunk.css",
       "static/chunks/styles.js",

@@ -1,4 +1,4 @@
-import { useState, useEffect, Fragment } from 'react';
+import { useState, Fragment } from 'react';
 import Link from 'next/link';
 import { blogsSearch } from '../../actions/blog';
 import './blog.scss';
@@ -26,7 +26,6 @@ const Search = () => {
         e.preventDefault();
 
         blogsSearch({ search }).then(data => {
-            console.log(data);
             setValues({
                 ...values,
                 searched: true,
@@ -37,7 +36,6 @@ const Search = () => {
     }
 
     const searchedBlogs = (results = []) => {
-        console.log(results);
         return (
             <div className="searched_blogs-content">
                 {message && <p>{message}</p>}

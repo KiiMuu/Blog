@@ -1,0 +1,50 @@
+@import '../../helpers/Variables';
+
+.user-profile {
+    h3 {
+        color: $darkColor;
+        font-weight: 900;
+        margin-bottom: 5px;
+    }
+    a {
+        color: $mainColor;
+        text-decoration: none;
+    }
+    p {
+        margin-top: 5px;
+        color: $darkColor;
+        span {
+            margin-right: 7px;
+            font-size: 14px;
+        }
+    }
+}
+
+.user-blogs {
+    h4 {
+        color: $darkColor;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    .blog-item {
+        background: $lightColor;
+        padding: 30px;
+        border-radius: 2px;
+        a {
+            text-align: center;
+            color: $mainColor;
+            text-decoration: none;
+        }
+    }
+}
+
+.user-contact {
+    h4 {
+        color: $darkColor;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    p {
+        margin: 0;
+    }
+}
