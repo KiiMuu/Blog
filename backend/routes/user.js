@@ -12,5 +12,6 @@ router.get(
     authController.authMiddleware,
     userController.read
 );
+router.get('/user/:username', userController.publicProfile);
 
 module.exports = router;
