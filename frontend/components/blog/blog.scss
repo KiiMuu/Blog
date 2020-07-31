@@ -1,0 +1,49 @@
+@import '../../helpers/Variables';
+
+// Search.js
+.input-field {
+    input {
+        height: 25px;
+        padding-left: 10px;
+        border-radius: 2px;
+        border: 1px solid #e4e4e4;
+        outline: none;
+        margin-right: 5px;
+        transition: all 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0s;
+        &:focus {
+            border-color: #80bdff;
+            box-shadow: 0 0 0 0.2rem rgba(2, 135, 207, .3);
+            outline: none;
+        }
+    }
+    button {
+        text-transform: uppercase;
+        border: none;
+        background: $mainColor;
+        cursor: pointer;
+        height: 27px;
+        color: $lightColor;
+        outline: none;
+        font-size: 12px;
+        vertical-align: top;
+    }
+}
+
+.searched_blogs-content {
+    p {
+        margin-top: 5px;
+        margin-bottom: 0;
+        color: $darkColor;
+        font-weight: 600;
+    }
+    .blogs {
+        margin-top: 15px;
+        a {
+            color: $mainColor;
+            font-weight: 600;
+            &:hover {
+                color: $mainColor;
+            }
+        }
+    }
+}

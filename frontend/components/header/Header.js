@@ -1,9 +1,11 @@
 import { Fragment } from 'react';
 import { APP_NAME } from '../../config';
-import Link from 'next/link';
 import Router from 'next/router';
 import './Header.scss';
 import { signout, isAuth } from '../../actions/auth';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import Search from '../blog/Search';
 
 import NProgress from 'nprogress';
 import '../../node_modules/nprogress/nprogress.css';
@@ -19,27 +21,27 @@ const Header = () => {
                 <div className="uk-container">
                     <nav data-uk-navbar>
                         <div className="uk-navbar-left">
-                            <Link href="/">
-                                <a className="uk-navbar-item uk-logo uk-text-uppercase logo">{APP_NAME}</a>
-                            </Link>
+                            <a href="/" className="uk-navbar-item uk-logo uk-text-uppercase logo">{APP_NAME}</a>
                         </div>
                         <div className="uk-navbar-right">
                             <ul className="uk-navbar-nav uk-visible@s">
+                                <li className="navSearch">
+                                    <a title="Find Blogs?"><span><FontAwesomeIcon icon={faSearch} /></span></a>
+                                    <div data-uk-dropdown="mode: click; animation: uk-animation-slide-top-small">
+                                        <div className="uk-nav uk-dropdown-nav">
+                                            <Search />
+                                        </div>
+                                    </div>
+                                </li>
                                 <li className="navLink">
-                                    <Link href="/blogs">
-                                        <a>Blogs</a>
-                                    </Link>
+                                    <a href="/blogs">Blogs</a>
                                 </li>
                                 {!isAuth() && <Fragment>
                                     <li className="navLink">
-                                        <Link href="/signup">
-                                            <a>SignUp</a>
-                                        </Link>
+                                        <a href="/signup">SignUp</a>
                                     </li>
                                     <li className="navLink">
-                                        <Link href="/signin">
-                                            <a>SignIn</a>
-                                        </Link>
+                                        <a href="/signin">SignIn</a>
                                     </li>
                                 </Fragment>}
                                 {isAuth() && isAuth().role === 0 && (

@@ -14,6 +14,22 @@
         font-size: 18px;
         font-weight: 600;
     }
+    .navSearch {
+        a {
+            color: $darkColor;
+            &:hover {
+                color: $darkColor;
+            }
+            span {
+                font-size: 13px;
+            }
+        }
+        .uk-dropdown-nav {
+            background: none;
+            box-shadow: none;
+            padding: 5px 0px 0 0;
+        }
+    }
     .navLink {
         @include linkHoverEffect;
         a {
