@@ -20,12 +20,6 @@
     "/_polyfills": [
       "static/runtime/polyfills.js"
     ],
-    "/user": [
-      "static/runtime/webpack.js",
-      "static/chunks/styles.chunk.css",
-      "static/chunks/styles.js",
-      "static/runtime/main.js"
-    ],
     "/user/update": [
       "static/runtime/webpack.js",
       "static/chunks/styles.chunk.css",
