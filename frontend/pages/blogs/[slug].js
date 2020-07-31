@@ -71,7 +71,7 @@ const singleBlog = ({ blog, query }) => {
 
     const showRelatedBlogs = () => {
         return related.map((blog, i) => {
-            return <article className="uk-width-1-3@l uk-width-1-2@m uk-width-1-1" key={i}>
+            return <article className="uk-width-1-2@m uk-width-1-1" key={i}>
                 <SmallCard blog={blog} />
             </article>
         });
@@ -97,7 +97,7 @@ const singleBlog = ({ blog, query }) => {
                                         <h2 className="uk-text-uppercase">{blog.title}</h2>
                                     </div>
                                     <div className="creator">
-                                        <p><span className="creator-icon"><FontAwesomeIcon icon={faPen} /></span> <span>Blogger</span>: {blog.postedBy.name}</p>
+                                        <p><span className="creator-icon"><FontAwesomeIcon icon={faPen} /></span> <span>Blogger</span>: <Link href={`/profile/${blog.postedBy.username}`}><a>{blog.postedBy.username}</a></Link></p>
                                         <p><span className="creator-icon"><FontAwesomeIcon icon={faClock} /></span> Published {moment(blog.createdAt).fromNow()}</p>
                                     </div>
                                     <div className="blog-tags-cats">
@@ -113,7 +113,7 @@ const singleBlog = ({ blog, query }) => {
                                     </div>
                                     <div className="related-blogs">
                                         <h4 className="uk-text-uppercase">Related Blogs</h4>
-                                        <div data-uk-grid>{showRelatedBlogs()}</div>
+                                        <div className="uk-grid-small" data-uk-grid>{showRelatedBlogs()}</div>
                                     </div>
                                     <div className="blog-comments">
                                         <p>blog comments</p>

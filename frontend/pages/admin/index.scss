@@ -1,7 +1,7 @@
 @import '../../helpers/Variables';
 @import '../../helpers/Mixins';
 
-.admin-dashboard {
+.admin-dashboard, .user-dashboard {
     .dash-heading {
         margin-bottom: 30px;
         h2 {
@@ -40,6 +40,9 @@
                 }
                 .update-blog {
                     color: #d63031;
+                }
+                .update-profile {
+                    color: #1abc9c;
                 }
             }
         }

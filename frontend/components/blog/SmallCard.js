@@ -9,9 +9,10 @@ const SmallCard = ({ blog }) => {
                 <div className="card-title">
                     <h4>{blog.title}</h4>
                 </div>
+                <span>Created by <Link href={`/profile/${blog.postedBy.username}`}><a>{blog.postedBy.username}</a></Link></span>
                 <div className="blog-excerpt">
                     <Link href={`/blogs/${blog.slug}`}>
-                        <a>Show Blog <span><FontAwesomeIcon icon={faArrowRight} /></span></a>
+                        <a>View Blog <span><FontAwesomeIcon icon={faArrowRight} /></span></a>
                     </Link>
                 </div>
             </section>

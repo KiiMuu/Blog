@@ -1,6 +1,5 @@
 import Layout from '../../components/layout/Layout';
 import Admin from '../../components/auth/Admin';
-import Link from 'next/link';
 import './index.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faBlog, faEdit } from '@fortawesome/free-solid-svg-icons';
