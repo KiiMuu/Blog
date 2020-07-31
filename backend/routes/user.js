@@ -13,5 +13,12 @@ router.get(
     userController.read
 );
 router.get('/user/:username', userController.publicProfile);
+router.put(
+    '/user/update', 
+    authController.requireSignIn, 
+    authController.authMiddleware,
+    userController.updateProfile
+);
+router.get('/user/photo/:username', userController.userPhoto);
 
 module.exports = router;
