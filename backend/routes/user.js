@@ -7,7 +7,7 @@ const userController = require('../controllers/user');
 
 // endpoints
 router.get(
-    '/profile', 
+    '/user/profile', 
     authController.requireSignIn, 
     authController.authMiddleware,
     userController.read

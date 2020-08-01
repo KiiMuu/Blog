@@ -4,7 +4,6 @@ const _ = require('lodash');
 const formidable = require('formidable');
 const fs = require('fs');
 const { errorHandler } = require('../helpers/dbErrorHandler');
-const { result } = require('lodash');
 
 exports.read = (req, res, next) => {
     req.profile.hashed_password = undefined;
@@ -53,6 +52,7 @@ exports.publicProfile = (req, res, next) => {
 
 exports.updateProfile = (req, res, next) => {
     let form = new formidable.IncomingForm();
+    form.keepExtensions = true;
     form.parse(req, (err, fields, files) => {
         if (err) {
             return res.status(400).json({
@@ -60,8 +60,14 @@ exports.updateProfile = (req, res, next) => {
             });
         }
 
-        let user = user.profile;
+        let user = req.profile;
         user = _.extend(user, fields);
+
+        if (fields.password && fields.password.length < 6) {
+            return res.status(400).json({
+                error: 'Password must be at least 6'
+            });
+        }
 
         if (files.photo) {
             if (files.photo.size > 10000000) {
@@ -72,18 +78,18 @@ exports.updateProfile = (req, res, next) => {
 
             user.photo.data = fs.readFileSync(files.photo.path);
             user.photo.contentType = files.photo.type;
-
-            user.save((err, result) => {
-                if (err) {
-                    return res.status(400).json({
-                        error: errorHandler(err)
-                    });
-                }
-
-                user.hashed_password = undefined;
-                res.json(user);
-            });
         }
+
+        user.save((err, result) => {
+            if (err) {
+                return res.status(400).json({
+                    error: errorHandler(err)
+                });
+            }
+
+            user.hashed_password = undefined;
+            res.json(user);
+        });
     });
 }
 
@@ -98,7 +104,7 @@ exports.userPhoto = (req, res, next) => {
         }
 
         if (user.photo.data) {
-            res.set('Content-Type', user.photo.data);
+            res.set('Content-Type', user.photo.contentType);
             return res.send(user.photo.data);
         }
     });
