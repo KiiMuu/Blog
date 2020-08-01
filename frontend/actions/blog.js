@@ -71,8 +71,16 @@ export const relatedBlogs = blog => {
     .catch(err => console.log(err));
 }
 
-export const listBlogs = () => {
-    return fetch(`${API}/blogs`, {
+export const listBlogs = (username) => {
+    let listBlogsEndpoint;
+
+    if (username) {
+        listBlogsEndpoint = `${API}/${username}/blogs`;
+    } else {
+        listBlogsEndpoint = `${API}/blogs`;
+    }
+
+    return fetch(`${listBlogsEndpoint}`, {
         method: 'GET'
     })
     .then(response => {
@@ -82,7 +90,15 @@ export const listBlogs = () => {
 }
 
 export const removeBlog = (slug, token) => {
-    return fetch(`${API}/blog/${slug}`, {
+    let removeBlogEndpoint;
+
+    if (isAuth() && isAuth().role === 1) {
+        removeBlogEndpoint = `${API}/blog/${slug}`;
+    } else if (isAuth() && isAuth().role === 0) {
+        removeBlogEndpoint = `${API}/user/blog/${slug}`;
+    }
+
+    return fetch(`${removeBlogEndpoint}`, {
         method: 'DELETE',
         headers: {
             Accept: 'application/json',
@@ -97,7 +113,15 @@ export const removeBlog = (slug, token) => {
 }
 
 export const updateBlog = (blog, token, slug) => {
-    return fetch(`${API}/blog/${slug}`, {
+    let updateBlogEndpoint;
+
+    if (isAuth() && isAuth().role === 1) {
+        updateBlogEndpoint = `${API}/blog/${slug}`;
+    } else if (isAuth() && isAuth().role === 0) {
+        updateBlogEndpoint = `${API}/user/blog/${slug}`;
+    }
+
+    return fetch(`${updateBlogEndpoint}`, {
         method: 'PUT',
         headers: {
             Accept: 'application/json',
