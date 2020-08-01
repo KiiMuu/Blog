@@ -1,7 +1,7 @@
 import { useState, Fragment, useEffect } from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
-import { getCookie, isAuth } from '../../actions/auth';
+import { getCookie, isAuth, updateUserInLS } from '../../actions/auth';
 import { getProfile, updateProfile } from '../../actions/user';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle, faExclamationCircle, faClock } from '@fortawesome/free-solid-svg-icons';
@@ -80,14 +80,16 @@ const UpdateProfile = () => {
                     loading: false
                 });
             } else {
-                setValues({
-                    ...values,
-                    username: data.username,
-                    name: data.name,
-                    email: data.email,
-                    about: data.about,
-                    success: true,
-                    loading: false
+                updateUserInLS(data, () => {
+                    setValues({
+                        ...values,
+                        username: data.username,
+                        name: data.name,
+                        email: data.email,
+                        about: data.about,
+                        success: true,
+                        loading: false
+                    });
                 });
             }
         });

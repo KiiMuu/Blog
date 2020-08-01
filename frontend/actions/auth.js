@@ -103,3 +103,16 @@ export const isAuth = () => {
         }
     }
 }
+
+// update user in localStorage
+export const updateUserInLS = (user, next) => {
+    if (process.browser) {
+        if (localStorage.getItem('user')) {
+            let auth = JSON.parse(localStorage.getItem('user'));
+            auth = user;
+            localStorage.setItem('user', JSON.stringify(auth));
+
+            next();
+        }
+    }
+}
