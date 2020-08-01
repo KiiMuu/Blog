@@ -55,7 +55,7 @@ const Header = () => {
                                     </li>
                                 )}
                                 <li className="navLink">
-                                    <a href="/user/crud/create">Create a Blog</a>
+                                    <a href="/user/crud/blog">Create a Blog</a>
                                 </li>
                                 {isAuth() && (
                                     <li className="navLink">

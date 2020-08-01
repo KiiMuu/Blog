@@ -7,9 +7,10 @@ import Link from 'next/link';
 import moment from 'moment';
 import renderHTML from 'react-render-html';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen, faClock } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faClock, faLink } from '@fortawesome/free-solid-svg-icons';
 import { APP_NAME, API, DOMAIN, FB_APP_ID } from "../../config";
 import SmallCard from '../../components/blog/SmallCard';
+import DisqusThread from '../../components/disqus/DisqusThread';
 
 
 const singleBlog = ({ blog, query }) => {
@@ -77,6 +78,18 @@ const singleBlog = ({ blog, query }) => {
         });
     }
 
+    const showComments = () => {
+        return (
+            <Fragment>
+                <DisqusThread 
+                    id={blog.id} 
+                    title={blog.title} 
+                    path={`/blog/${blog.slug}`}
+                />
+            </Fragment>
+        )
+    }
+
     return <Fragment>
         {head()}
         <Layout>
@@ -116,7 +129,8 @@ const singleBlog = ({ blog, query }) => {
                                         <div className="uk-grid-small" data-uk-grid>{showRelatedBlogs()}</div>
                                     </div>
                                     <div className="blog-comments">
-                                        <p>blog comments</p>
+                                        <h4 className="uk-text-uppercase">Share you thoughts</h4>
+                                        {showComments()}
                                     </div>
                                 </section>
                             </div>

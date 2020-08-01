@@ -161,7 +161,10 @@
         }
     }
     .blog-comments {
-        // margin-bottom: 25px;
+        h4 {
+            color: $darkColor;
+            font-weight: 600;
+        }
     }
 }
 
