@@ -1,0 +1,52 @@
+@import '../../helpers/Variables';
+
+*+.uk-grid-margin, .uk-grid+.uk-grid, .uk-grid>.uk-grid-margin {
+    margin-top: 10px;
+}
+
+.update-form {
+    .input {
+        // margin-bottom: 10px;
+        label {
+            display: block;
+            color: $darkColor;
+            font-weight: 600;
+        }
+        input, textarea {
+            font-size: 15px;
+            width: 100%;
+            padding-left: 10px;
+            margin-top: 2px;
+            height: 35px;
+            border-radius: 2px;
+            border: 1px solid #d6d6d6;
+            transition: all 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0s;
+            &:focus {
+                border-color: #80bdff;
+                box-shadow: 0 0 0 0.2rem rgba(2, 135, 207, .3);
+                outline: none;
+            }
+        }
+        input[type="password"] {
+            margin-bottom: 10px;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px 0 0 10px;
+            height: 100px;
+        }
+    }
+    .control {
+        button {
+            text-transform: uppercase;
+            border: none;
+            background: $mainColor;
+            cursor: pointer;
+            width: 100px;
+            height: 30px;
+            color: $lightColor;
+            outline: none;
+            margin-top: 10px;
+        }
+    }
+}

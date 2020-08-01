@@ -37,7 +37,8 @@ export const updateProfile = (token, user) => {
         headers: {
             Accept: 'application/json',
             Authorization: `Bearer ${token}`
-        }
+        },
+        body: user
     })
     .then(response => {
         return response.json()

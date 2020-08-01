@@ -8,13 +8,13 @@ const UserProfileUpdate = () => {
         <Layout>
             <Private>
                 <div className="user-dashboard uk-margin-medium-top">
-                    <div className="uk-container">
+                    <div className="uk-container uk-container-small">
                         <div className="dash-heading uk-text-center">
                             <h2 className="uk-text-uppercase">
                                 Update Profile
                             </h2>
                         </div>
-                        <div data-uk-grid>
+                        <div className="uk-grid-small" data-uk-grid>
                             <UpdateProfile />
                         </div>
                     </div>
