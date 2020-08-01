@@ -1,10 +1,15 @@
 @import '../../helpers/Variables';
 
 .user-profile {
+    img {
+        width: 180px;
+        height: 180px;
+        box-shadow: 0 0 5px 7px rgba(0, 0, 0, 0.04);
+    }
     h3 {
         color: $darkColor;
         font-weight: 900;
-        margin-bottom: 5px;
+        margin: 5px 0;
     }
     a {
         color: $mainColor;

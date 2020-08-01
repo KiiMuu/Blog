@@ -54,6 +54,9 @@ const Header = () => {
                                         <a href="/admin">Dashboard</a>
                                     </li>
                                 )}
+                                <li className="navLink">
+                                    <a href="/user/crud/create">Create a Blog</a>
+                                </li>
                                 {isAuth() && (
                                     <li className="navLink">
                                         <a onClick={() => signout(() => {Router.replace('/signin')})}>SignOut</a>

@@ -55,9 +55,11 @@ const UserProfile = ({ user, blogs, query }) => {
                 <div className="user-profile uk-text-center uk-margin-medium-top">
                     <div className="uk-container uk-container-small">
                         <img
+                            className="uk-border-circle"
                             src={`${API}/user/photo/${user.username}`}
-                            style={{ maxHeight: 'auto', maxWidth: '100%' }}
-                            alt={`${user.username} photo`}
+                            alt={`${user.name} photo`}
+                            draggable="false"
+                            title={`${user.name} photo`}
                         />
                         <h3 className="uk-text-uppercase">{user.name}</h3>
                         <p><span><FontAwesomeIcon icon={faClock} /></span>Joined {moment(user.createdAt).fromNow()}</p>

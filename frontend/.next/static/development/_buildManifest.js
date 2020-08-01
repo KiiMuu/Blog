@@ -1,1 +1,1 @@
-self.__BUILD_MANIFEST = {"/user/update":["static\u002Fchunks\u002Fstyles.chunk.css","static\u002Fchunks\u002Fstyles.js"]};self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()
+self.__BUILD_MANIFEST = (function(a,b){return {"/signin":[a,b],"/user":[a,b]}}("static\u002Fchunks\u002Fstyles.chunk.css","static\u002Fchunks\u002Fstyles.js"));self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()

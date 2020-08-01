@@ -1,7 +1,5 @@
 import { useState, Fragment, useEffect } from 'react';
-import Link from 'next/link';
-import Router from 'next/router';
-import { getCookie, isAuth, updateUserInLS } from '../../actions/auth';
+import { getCookie, updateUserInLS } from '../../actions/auth';
 import { getProfile, updateProfile } from '../../actions/user';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle, faExclamationCircle, faClock } from '@fortawesome/free-solid-svg-icons';
@@ -24,7 +22,7 @@ const UpdateProfile = () => {
     });
 
     const token = getCookie('token');
-    const { username, name, email, password, about, error, success, loading, photo, userData } = values;
+    const { username, name, email, password, about, error, success, loading, userData } = values;
 
     const init = () => {
         getProfile(token).then(data => {
@@ -220,8 +218,9 @@ const UpdateProfile = () => {
                     <img
                         className="uk-border-circle"
                         src={`${API}/user/photo/${username}`}
-                        alt={`${username} photo`}
+                        alt={`${name} photo`}
                         draggable="false"
+                        title={`${name} photo`}
                     />
                     <div className="name">{name}</div>
                 </div>
