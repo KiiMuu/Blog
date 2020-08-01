@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Router from 'next/router';
+import { Router, withRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faKey, faLongArrowAltRight, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import './Auth.scss';
 import { signin, authenticate, isAuth } from '../../actions/auth';
 import Spinner from '../layout/spinner/Spinner';
 
-const SigninComponent = () => {
+const SigninComponent = ({ router }) => {
 
     const [isTyped, setIsTyped] = useState(false);
     const [values, setValues] = useState({
@@ -69,11 +69,20 @@ const SigninComponent = () => {
     const showError = () => error ? <div className="error"><span><FontAwesomeIcon icon={faExclamationCircle} /></span> {error}</div> : '';
     const showMessage = () => message ? <div className="message">{message}</div> : '';
 
+    const showRedirectMessage = () => {
+        if (router.query.message) {
+            return <p className="expired-message"><span><FontAwesomeIcon icon={faExclamationCircle} /></span>{router.query.message}</p>
+        } else {
+            return;
+        }
+    }
+
     const signinForm = () => {
         return (
             <div className="signin-form">
                 {showLoading()}
                 <div className="form-heading uk-text-center">
+                    {showRedirectMessage()}
                     <h2 className="uk-text-uppercase">Signin</h2>
                     <p className="uk-text-muted">Login with your current account</p>
                 </div>
@@ -154,4 +163,4 @@ const SigninComponent = () => {
     )
 }
 
-export default SigninComponent;
+export default withRouter(SigninComponent);

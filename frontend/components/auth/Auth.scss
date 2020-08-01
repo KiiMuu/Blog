@@ -16,6 +16,17 @@
     }
 }
 
+.expired-message {
+    color: $darkColor;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    span {
+        margin-right: 5px;
+    }
+}
+
 .signup, .signin {
     .uk-container-small {
         max-width: 400px;

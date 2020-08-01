@@ -1,6 +1,24 @@
 import fetch from 'isomorphic-fetch';
 import cookie from 'js-cookie';
 import { API } from '../config';
+import Router from 'next/router';
+
+// Say JWT has expired!!
+export const handleResponse = response => {
+    // unauthorized status => 401
+    if (response.status === 401) {
+        signout(() => {
+            Router.push({
+                pathname: '/signin',
+                query: {
+                    message: 'Your session is expired. Please signin'
+                }
+            });
+        });
+    } else {
+        return;
+    }
+}
 
 export const signup = user => {
     return fetch(`${API}/signup`, {
