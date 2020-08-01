@@ -31,4 +31,24 @@ router.get('/blog/photo/:slug', blogController.blogPhoto);
 router.post('/blogs/related', blogController.relatedBlogs);
 router.get('/blogs/search', blogController.blogsSearch);
 
+// user endpoints for blog CRUD
+router.post(
+    '/user/blog',
+    authController.requireSignIn, 
+    authController.authMiddleware, 
+    blogController.createBlog
+);
+router.delete(
+    '/user/blog/:slug',
+    authController.requireSignIn, 
+    authController.authMiddleware,  
+    blogController.removeBlog
+);
+router.put(
+    '/user/blog/:slug',
+    authController.requireSignIn, 
+    authController.authMiddleware,  
+    blogController.updateBlog
+);
+
 module.exports = router;
