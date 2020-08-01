@@ -57,7 +57,8 @@
 }
 
 .alert-message {
-    position: relative;
+    position: fixed;
+    width: 100%;
     .message {
         position: absolute;
         opacity: 0;

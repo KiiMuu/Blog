@@ -3,7 +3,10 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { getCookie, isAuth } from '../../actions/auth';
 import { getProfile, updateProfile } from '../../actions/user';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheckCircle, faExclamationCircle, faClock } from '@fortawesome/free-solid-svg-icons';
 import './Profile.scss';
+import { API } from '../../config';
 
 const UpdateProfile = () => {
 
@@ -90,6 +93,60 @@ const UpdateProfile = () => {
         });
     }
 
+    const handleMouseMove = () => {
+        setValues({
+            ...values,
+            error: false,
+            success: false
+        });
+    }
+
+    // messages
+    const showError = () => {
+        if (error) {
+            return (
+                <div className="alert-message" onMouseMove={handleMouseMove}>
+                    <p 
+                        className="message error"
+                        style={{
+                            opacity: error ? '1' : '0'
+                        }}
+                    >{error} <span><FontAwesomeIcon icon={faExclamationCircle} /></span></p>
+                </div>
+            )
+        }
+    }
+
+    const showSuccess = () => {
+        if (success) {
+            return (
+                <div className="alert-message" onMouseMove={handleMouseMove}>
+                    <p 
+                        className="message success"
+                        style={{
+                            opacity: success ? '1' : '0'
+                        }}
+                    >Profile Updated <span><FontAwesomeIcon icon={faCheckCircle} /></span></p>
+                </div>
+            )
+        }
+    }
+
+    const showLoading = () => {
+        if (loading) {
+            return (
+                <div className="alert-message" onMouseMove={handleMouseMove}>
+                    <p 
+                        className="message loading"
+                        style={{
+                            opacity: loading ? '1' : '0'
+                        }}
+                    >Loading... <span><FontAwesomeIcon icon={faClock} /></span></p>
+                </div>
+            )
+        }
+    }
+
     const updateForm = () => (
         <form onSubmit={handleSubmit}>
             <div className="uk-child-width-1-2@m" data-uk-grid>
@@ -98,7 +155,7 @@ const UpdateProfile = () => {
                     <input 
                         id="photo" 
                         type="file" 
-                        accept="image/*" 
+                        accept="image/*"
                         onChange={handleChange('photo')}
                     />
                 </div>
@@ -157,10 +214,21 @@ const UpdateProfile = () => {
     return (
         <Fragment>
             <div className="uk-width-1-4@m">
-                <div className="user-img">image</div>
+                <div className="user-img uk-text-center">
+                    <img
+                        className="uk-border-circle"
+                        src={`${API}/user/photo/${username}`}
+                        alt={`${username} photo`}
+                        draggable="false"
+                    />
+                    <div className="name">{name}</div>
+                </div>
             </div>
             <div className="uk-width-3-4@m">
                 <div className="update-form">
+                    {showLoading()}
+                    {showError()}
+                    {showSuccess()}
                     {updateForm()}
                 </div>
             </div>
