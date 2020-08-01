@@ -38,16 +38,19 @@ router.post(
     authController.authMiddleware, 
     blogController.createBlog
 );
+router.get('/:username/blogs', blogController.blogsByUser);
 router.delete(
     '/user/blog/:slug',
     authController.requireSignIn, 
-    authController.authMiddleware,  
+    authController.authMiddleware,
+    authController.canUpdateDeleteBlog,
     blogController.removeBlog
 );
 router.put(
     '/user/blog/:slug',
     authController.requireSignIn, 
-    authController.authMiddleware,  
+    authController.authMiddleware,
+    authController.canUpdateDeleteBlog,
     blogController.updateBlog
 );
 

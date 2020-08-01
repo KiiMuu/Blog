@@ -1,6 +1,7 @@
 const Blog = require('../models/blog');
 const Category = require('../models/category');
 const Tag = require('../models/tag');
+const User = require('../models/user');
 const { errorHandler } = require('../helpers/dbErrorHandler');
 const { smartTrim } = require('../helpers/blog');
 const fs = require('fs');
@@ -351,4 +352,34 @@ exports.blogsSearch = (req, res, next) => {
             res.json(blogs);
         }).select('-photo -body');
     }
+}
+
+exports.blogsByUser = (req, res, next) => {
+    const username = req.params.username;
+
+    User.findOne({ username }).exec((err, user) => {
+        if (err) {
+            return res.status(400).json({
+                error: errorHandler(err)
+            });
+        }
+
+        let userId = user._id;
+        
+        // list all blogs by this user
+        Blog.find({ postedBy: userId })
+        .populate('categories', '_id name slug')
+        .populate('tags', '_id name slug')
+        .populate('postedBy', '_id name username')
+        .select('_id title slug postedBy createdAt updatedAt')
+        .exec((err, data) => {
+            if (err) {
+                return res.status(400).json({
+                    error: errorHandler(err)
+                });
+            }
+
+            res.json(data);
+        });
+    });
 }
