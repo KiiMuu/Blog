@@ -2,12 +2,12 @@
 @import '../../helpers/Mixins';
 
 .alert-message {
-    position: fixed;
+    position: relative;
     width: 100%;
     .message {
         position: absolute;
         opacity: 0;
-        top: -60px;
+        top: -45px;
         z-index: 99;
         padding: 5px 10px;
         border-radius: 2px;
@@ -35,14 +35,15 @@
     }
 }
 
+.contact-heading {
+    color: $darkColor;
+    font-weight: 900;
+}
+
 .contact-form {
     padding: 50px;
     @include gradientBG;
     box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.06);
-    h2 {
-        color: $darkColor;
-        font-weight: 900;
-    }
     form {
         .input {
             label {

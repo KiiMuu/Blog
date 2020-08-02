@@ -8,6 +8,7 @@ import './profile.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faClock } from '@fortawesome/free-solid-svg-icons';
 import { APP_NAME, API, DOMAIN, FB_APP_ID } from "../../config";
+import ContactForm from '../../components/contact/ContactForm';
 
 const UserProfile = ({ user, blogs, query }) => {
 
@@ -76,9 +77,9 @@ const UserProfile = ({ user, blogs, query }) => {
                 <div className="user-contact uk-margin-medium-top">
                     <div className="uk-container uk-container-small">
                         <div className="uk-grid-small" data-uk-grid>
-                            <div className="uk-width-1-2@m">
-                                <h4>Message {user.name}</h4>
-                                <p>contact user</p>
+                            <div className="uk-width-1-1@m">
+                                <h4>Contact with {user.name}</h4>
+                                <ContactForm authorEmail={user.email} />
                             </div>
                         </div>
                     </div>

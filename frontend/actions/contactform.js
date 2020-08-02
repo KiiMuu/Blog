@@ -5,7 +5,7 @@ export const contactForm = data => {
     let emailEndpoint;
 
     if (data.authorEmail) {
-        emailEndpoint = `${API}/contact-blog-author`;
+        emailEndpoint = `${API}/contact/contact-blog-author`;
     } else {
         emailEndpoint = `${API}/contact`;
     }

@@ -1,11 +1,10 @@
 import { useState, Fragment } from 'react';
-import Link from 'next/link';
 import { contactForm } from '../../actions/contactform';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExclamationCircle, faStar } from '@fortawesome/free-solid-svg-icons';
 import './ContactForm.scss';
 
-const ContactForm = () => {
+const ContactForm = ({ authorEmail }) => {
 
     const [values, setValues] = useState({
         name: '',
@@ -17,7 +16,7 @@ const ContactForm = () => {
         error: false
     });
 
-    const { name, email, message, sent, buttonText, success, error } = values;
+    const { name, email, message, buttonText, success, error } = values;
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -27,7 +26,7 @@ const ContactForm = () => {
             buttonText: 'Sending...'
         });
 
-        contactForm({ name, email, message }).then(data => {
+        contactForm({ authorEmail, name, email, message }).then(data => {
             if (data.error) {
                 setValues({
                     ...values,
@@ -91,13 +90,15 @@ const ContactForm = () => {
             [name]: e.target.value,
             error: false,
             success: false,
-            buttonText: 'Send Message'
+            buttonText: 'Send'
         });
     }
 
     const contactFormContent = () => {
         return (
             <form onSubmit={handleSubmit} noValidate>
+                {showSuccess()}
+                {showError()}
                 <div className="uk-grid-small" data-uk-grid>
                     <div className="input uk-width-1-2@m">
                         <label htmlFor="name">Name</label>
@@ -143,9 +144,6 @@ const ContactForm = () => {
     return (
         <Fragment>
             <div className="contact-form">
-                <h2 className="uk-text-center uk-text-uppercase">Be in Touch</h2>
-                {showSuccess()}
-                {showError()}
                 {contactFormContent()}
             </div>
         </Fragment>
