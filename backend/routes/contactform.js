@@ -15,5 +15,11 @@ router.post(
     runValidation,
     contactFormController.contactForm
 );
+router.post(
+    '/contact/contact-blog-author',
+    contactFormValidator,
+    runValidation,
+    contactFormController.contactBlogAuthor
+);
 
 module.exports = router;
