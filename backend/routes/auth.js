@@ -15,9 +15,13 @@ const {
 
 // endpoints
 router.post(
-    '/signup', 
+    '/pre-signup', 
     userSignUpValidator,
     runValidation, 
+    authController.preSignup
+);
+router.post(
+    '/signup',
     authController.signup
 );
 router.post(
