@@ -1,7 +1,7 @@
 @import '../../helpers/Variables';
 @import '../../helpers/Mixins';
 
-// forgor.js
+// forgot.js
 .alert-message {
     position: relative;
     width: 100%;
@@ -80,5 +80,38 @@
             outline: none;
             font-size: 13px;
         }
+    }
+}
+
+// activate
+.activation {
+    h3 {
+        color: $darkColor;
+    }
+    .error-msg {
+        color: #f0506e;
+        font-weight: 600;
+    }
+    .success {
+        color: #80bdff;
+        font-weight: 600;
+    }
+    .signin {
+        font-weight: 600;
+        a {
+            color: #80bdff;
+            text-decoration: underline;
+        }
+    }
+    button {
+        text-transform: uppercase;
+        border: none;
+        background: $mainColor;
+        cursor: pointer;
+        width: 100px;
+        height: 40px;
+        color: $lightColor;
+        outline: none;
+        font-size: 13px;
     }
 }

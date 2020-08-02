@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Layout from '../../../../components/layout/Layout';
 import { resetPassword } from '../../../../actions/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

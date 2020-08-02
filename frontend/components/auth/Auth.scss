@@ -16,6 +16,13 @@
     }
 }
 
+.message {
+    color: $darkColor;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
 .expired-message {
     color: $darkColor;
     margin-top: 0;
@@ -91,10 +98,11 @@
                         border: none;
                         background: $mainColor;
                         cursor: pointer;
-                        width: 100px;
-                        height: 30px;
+                        width: 120px;
+                        height: 35px;
                         color: $lightColor;
                         outline: none;
+                        font-size: 13px;
                     }
                 }
                 .signin-btn, .signup-btn {

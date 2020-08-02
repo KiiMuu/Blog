@@ -4,8 +4,7 @@ import Router from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faUserAlt, faKey, faLongArrowAltRight, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import './Auth.scss';
-import { signup, isAuth } from '../../actions/auth';
-import Spinner from '../layout/spinner/Spinner';
+import { isAuth, preSignup } from '../../actions/auth';
 
 const SignupComponent = () => {
 
@@ -17,10 +16,11 @@ const SignupComponent = () => {
         error: '',
         loading: false,
         message: '',
-        showForm: true
+        showForm: true,
+        buttonText: 'Sign up'
     });
 
-    const { name, email, password, error, loading, message, showForm } = values;
+    const { name, email, password, error, loading, message, showForm, buttonText } = values;
 
     useEffect(() => {
         isAuth() && Router.push('/');
@@ -40,11 +40,12 @@ const SignupComponent = () => {
         setValues({
             ...values,
             loading: true,
+            buttonText: 'Loading...',
             error: false
         });
         const user = { name, email, password };
 
-        signup(user).then(data => {
+        preSignup(user).then(data => {
             if (data.error) {
                 setValues({
                     ...values,
@@ -60,20 +61,18 @@ const SignupComponent = () => {
                     error: '',
                     loading: false,
                     message: data.message,
-                    showForm: false
+                    showForm: true
                 });
             }
         })
     }    
 
-    const showLoading = () => loading ? <Spinner /> : '';
     const showError = () => error ? <div className="error"><span><FontAwesomeIcon icon={faExclamationCircle} /></span> {error}</div> : '';
-    const showMessage = () => message ? <div className="message">{message}</div> : '';
+    const showMessage = () => message ? <div className="message">{message} <span><FontAwesomeIcon icon={faEnvelope} /></span></div> : '';
 
     const signupForm = () => {
         return (
             <div className="signup-form">
-                {showLoading()}
                 <div className="form-heading uk-text-center">
                     <h2 className="uk-text-uppercase">Signup</h2>
                     <p className="uk-text-muted">Register with a new account</p>
@@ -148,7 +147,7 @@ const SignupComponent = () => {
                             <div className="signup-control">
                                 <div className="uk-child-width-1-2 uk-flex uk-flex-middle" data-uk-grid>
                                     <div className="signup-btn uk-text-left">
-                                        <button type="submit">Sign Up</button>
+                                        <button type="submit">{buttonText}</button>
                                     </div>
                                     <div className="signin-btn uk-text-right">
                                         <Link href="/signin">
@@ -169,7 +168,7 @@ const SignupComponent = () => {
         <div className="signup">
             <div className="uk-container uk-container-small">
                 <div className="uk-child-width-1-1@m uk-flex uk-flex-stretch" data-uk-grid>
-                    {showForm &&  signupForm()}
+                    {showForm && signupForm()}
                 </div>
             </div>
         </div>

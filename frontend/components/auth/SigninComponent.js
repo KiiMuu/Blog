@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faKey, faLongArrowAltRight, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import './Auth.scss';
 import { signin, authenticate, isAuth } from '../../actions/auth';
-import Spinner from '../layout/spinner/Spinner';
 
 const SigninComponent = ({ router }) => {
 
@@ -17,10 +16,11 @@ const SigninComponent = ({ router }) => {
         error: '',
         loading: false,
         message: '',
-        showForm: true
+        showForm: true,
+        buttonText: 'Sign in'
     });
 
-    const { email, password, error, loading, message, showForm } = values;
+    const { email, password, error, loading, message, showForm, buttonText } = values;
 
     useEffect(() => {
         isAuth() && Router.push('/');
@@ -40,6 +40,7 @@ const SigninComponent = ({ router }) => {
         setValues({
             ...values,
             loading: true,
+            buttonText: 'Loading...',
             error: false
         });
         const user = { email, password };
@@ -66,7 +67,6 @@ const SigninComponent = ({ router }) => {
         })
     }    
 
-    const showLoading = () => loading ? <Spinner /> : '';
     const showError = () => error ? <div className="error"><span><FontAwesomeIcon icon={faExclamationCircle} /></span> {error}</div> : '';
     const showMessage = () => message ? <div className="message">{message}</div> : '';
 
@@ -81,7 +81,6 @@ const SigninComponent = ({ router }) => {
     const signinForm = () => {
         return (
             <div className="signin-form">
-                {showLoading()}
                 <div className="form-heading uk-text-center">
                     {showRedirectMessage()}
                     <h2 className="uk-text-uppercase">Signin</h2>
@@ -136,7 +135,7 @@ const SigninComponent = ({ router }) => {
                             <div className="signin-control">
                                 <div className="uk-child-width-1-2 uk-flex uk-flex-middle" data-uk-grid>
                                     <div className="signin-btn uk-text-left">
-                                        <button type="submit">Sign In</button>
+                                        <button type="submit">{buttonText}</button>
                                     </div>
                                     <div className="signup-btn uk-text-right">
                                         <Link href="/signup">
