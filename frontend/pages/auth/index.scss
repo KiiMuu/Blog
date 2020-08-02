@@ -1,0 +1,84 @@
+@import '../../helpers/Variables';
+@import '../../helpers/Mixins';
+
+// forgor.js
+.alert-message {
+    position: relative;
+    width: 100%;
+    .message {
+        position: absolute;
+        opacity: 0;
+        top: -45px;
+        z-index: 99;
+        padding: 5px 10px;
+        border-radius: 2px;
+        animation: messageAlert .15s linear;
+        span {
+            margin-left: 5px;
+        }
+    }
+    .sent-message {
+        top: 0;
+    }
+    .success {
+        color: $darkColor;
+        background: #edfbf6;
+    }
+    .error {
+        color: #f0506e;
+        background: #f8f8f8;
+    }
+}
+
+@keyframes messageAlert {
+    from {
+        left: -60px;
+    }
+    to {
+        left: 0;
+    }
+}
+
+.reset-pass {
+    h2 {
+        color: $darkColor;
+        font-weight: 600;
+    }
+}
+
+.reset_pass-form {
+    padding: 50px;
+    @include gradientBG;
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.06);
+    .form-input {
+        label {
+            color: $darkColor;
+            font-weight: 600;
+        }
+        .uk-input {
+            margin-top: 5px;
+            height: 50px;
+            border-radius: 2px;
+            border-color: #dddfdf;
+            transition: all 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0s;
+            &:focus {
+                border-color: #80bdff;
+                box-shadow: 0 0 0 0.2rem rgba(2, 135, 207, .3);
+                outline: none;
+            }
+        }
+    }
+    .reset_pass-btn {
+        button {
+            text-transform: uppercase;
+            border: none;
+            background: $mainColor;
+            cursor: pointer;
+            width: 150px;
+            height: 45px;
+            color: $lightColor;
+            outline: none;
+            font-size: 13px;
+        }
+    }
+}

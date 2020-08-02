@@ -145,6 +145,11 @@ const SigninComponent = ({ router }) => {
                                         <span><FontAwesomeIcon icon={faLongArrowAltRight} /></span>
                                     </div>
                                 </div>
+                                <div className="forgot-btn uk-text-left">
+                                    <Link href="/auth/password/forgot">
+                                        <a>Forgot Password?</a>
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     </form>
