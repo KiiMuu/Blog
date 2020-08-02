@@ -3,6 +3,8 @@ const Blog = require('../models/blog');
 const shortId = require('shortid');
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
+const nodemailer = require('nodemailer');
+const smtpTransport = require('nodemailer-smtp-transport');
 const { errorHandler } = require('../helpers/dbErrorHandler');
 
 exports.signup = (req, res, next) => {
@@ -147,4 +149,77 @@ exports.canUpdateDeleteBlog = (req, res, next) => {
 
         next();
     });
+}
+
+exports.forgotPassword = (req, res, next) => {
+    const { email } = req.body;
+
+    User.findOne({ email }, (err, user) => {
+        if (err || !user) {
+            return res.status(401).json({
+                error: 'User does not exist'
+            });
+        }
+
+        const token = jwt.sign(
+            { _id: user._id }, 
+            process.env.JWT_RESET_PASSWORD, 
+            { expiresIn: '10m' }
+        );
+
+        // email
+        // populating the db > user > resetPasswordLink
+        return user.updateOne({ resetPasswordLink: token }, (err, success) => {
+            if (err) {
+                return res.status(400).json({ 
+                    error: errorHandler(err)
+                });
+            } else {
+                nodemailer.createTestAccount((err, account) => {
+                    const htmlEmail = `
+                        <p>Please use the following link to reset your password:</p>
+                        <p>${process.env.CLIENT_URL}/auth/password/reset/${token}</p>
+                        <hr />
+                        <p>This email may contain sensetive information</p>
+                        <p>https://bloggawy.com</p>
+                    `
+            
+                    let transporter = nodemailer.createTransport(smtpTransport({
+                        service: 'gmail',
+                        port: 123,
+                        secure: true,
+                        auth: {
+                            user: `${process.env.EMAIL_TO}`,
+                            pass: "Karim604050@FCIHGMAIL"
+                        }
+                    }));
+            
+                    let mailOptions = {
+                        to: email,
+                        from: process.env.EMAIL_FROM,
+                        subject: `Password reset link`,
+                        html: htmlEmail
+                    }
+            
+                    transporter.sendMail(mailOptions, (err, info) => {
+                        if (err) {
+                            return res.status(400).json({ 
+                                errors: [{ 
+                                    msg: err 
+                                }] 
+                            });
+                        }
+            
+                        res.json({ 
+                            msg: `Email has been sent to ${email}. Follow the instructions to reset your password. Link expires in 10-min.`
+                        });
+                    });
+                });
+            }
+        });
+    });
+}
+
+exports.resetPassword = (req, res, next) => {
+    
 }
