@@ -36,6 +36,9 @@ const Header = () => {
                                 <li className="navLink">
                                     <a href="/blogs">Blogs</a>
                                 </li>
+                                <li className="navLink">
+                                    <a href="/user/crud/blog">Create a Blog</a>
+                                </li>
                                 {!isAuth() && <Fragment>
                                     <li className="navLink">
                                         <a href="/signup">SignUp</a>
@@ -55,7 +58,7 @@ const Header = () => {
                                     </li>
                                 )}
                                 <li className="navLink">
-                                    <a href="/user/crud/blog">Create a Blog</a>
+                                    <a href="/contact">Contact</a>
                                 </li>
                                 {isAuth() && (
                                     <li className="navLink">
