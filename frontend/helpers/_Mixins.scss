@@ -39,6 +39,6 @@
 // gradient bg
 @mixin gradientBG {
     background: #FFFFFF;
-    // background: -webkit-linear-gradient(to right, #FFFFFF, $lightColor);
-    // background: linear-gradient(to right, #FFFFFF, $lightColor);
+    background-image: -webkit-linear-gradient(120deg, #fdfbfb 0%, #ebedee 250%);
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 250%);
 }

@@ -34,6 +34,8 @@
         @include linkHoverEffect;
         a {
             color: $darkColor;
+            font-weight: 500;
+            font-size: 13px;
             &:hover, &:active, &:focus {
                 color: $darkColor;
             }
