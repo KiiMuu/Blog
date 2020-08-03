@@ -7,7 +7,7 @@ import Link from 'next/link';
 import moment from 'moment';
 import renderHTML from 'react-render-html';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen, faClock, faLink } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faClock } from '@fortawesome/free-solid-svg-icons';
 import { APP_NAME, API, DOMAIN, FB_APP_ID } from "../../config";
 import SmallCard from '../../components/blog/SmallCard';
 import DisqusThread from '../../components/disqus/DisqusThread';
@@ -110,7 +110,7 @@ const singleBlog = ({ blog, query }) => {
                                         <h2 className="uk-text-uppercase">{blog.title}</h2>
                                     </div>
                                     <div className="creator">
-                                        <p><span className="creator-icon"><FontAwesomeIcon icon={faPen} /></span> <span>Blogger</span>: <Link href={`/profile/${blog.postedBy.username}`}><a>{blog.postedBy.username}</a></Link></p>
+                                        <p><span className="creator-icon"><FontAwesomeIcon icon={faPen} /></span> <span>Blogger</span>: <Link href={`/profile/${blog.postedBy.username}`}><a>{blog.postedBy.name}</a></Link></p>
                                         <p><span className="creator-icon"><FontAwesomeIcon icon={faClock} /></span> Published {moment(blog.createdAt).fromNow()}</p>
                                     </div>
                                     <div className="blog-tags-cats">
@@ -126,7 +126,9 @@ const singleBlog = ({ blog, query }) => {
                                     </div>
                                     <div className="related-blogs">
                                         <h4 className="uk-text-uppercase">Related Blogs</h4>
-                                        <div className="uk-grid-small" data-uk-grid>{showRelatedBlogs()}</div>
+                                        <div className="uk-grid-small" data-uk-grid>
+                                            {related.length === 0 ? <p className="has-no-related">This blog has no related blogs</p> : showRelatedBlogs()}
+                                        </div>
                                     </div>
                                     <div className="blog-comments">
                                         <h4 className="uk-text-uppercase">Share you thoughts</h4>

@@ -39,14 +39,6 @@ const Header = () => {
                                 <li className="navLink">
                                     <a href="/user/crud/blog">Create a Blog</a>
                                 </li>
-                                {!isAuth() && <Fragment>
-                                    <li className="navLink">
-                                        <a href="/signup">SignUp</a>
-                                    </li>
-                                    <li className="navLink">
-                                        <a href="/signin">SignIn</a>
-                                    </li>
-                                </Fragment>}
                                 {isAuth() && isAuth().role === 0 && (
                                     <li className="navLink">
                                         <a href="/user">Dashboard</a>
@@ -60,6 +52,14 @@ const Header = () => {
                                 <li className="navLink">
                                     <a href="/contact">Contact</a>
                                 </li>
+                                {!isAuth() && <Fragment>
+                                    <li className="navLink">
+                                        <a href="/signup">SignUp</a>
+                                    </li>
+                                    <li className="navLink">
+                                        <a href="/signin">SignIn</a>
+                                    </li>
+                                </Fragment>}
                                 {isAuth() && (
                                     <li className="navLink">
                                         <a onClick={() => signout(() => {Router.replace('/signin')})}>SignOut</a>

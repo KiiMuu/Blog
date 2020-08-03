@@ -41,7 +41,9 @@ const AdminIndex = () => {
                                 </div>
                             </div>
                             <div className="uk-child-3-4@m">
-                                Content
+                                <div className="admin-content">
+                                    <h1 className="uk-text-uppercase">Admin Area</h1>
+                                </div>
                             </div>
                         </div>
                     </div>

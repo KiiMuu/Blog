@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import renderHTML from 'react-render-html';
 import { API } from '../../config';
 
 const Card = ({ blog }) => {
@@ -24,10 +23,9 @@ const Card = ({ blog }) => {
                         <a><h2>{blog.title}</h2></a>
                     </Link>
                 </div>
-                <div className="blog-excerpt">
-                    <p>{renderHTML(blog.excerpt)}</p>
+                <div className="blog-link">
                     <Link href={`/blogs/${blog.slug}`}>
-                        <a>Read More <span><FontAwesomeIcon icon={faArrowRight} /></span></a>
+                        <a>Read Blog <span><FontAwesomeIcon icon={faArrowRight} /></span></a>
                     </Link>
                 </div>
             </section>

@@ -1,0 +1,31 @@
+@import '../helpers/Variables';
+
+body, html {
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.home-page {
+    display: flex;
+    h1 {
+        color: $darkColor;
+        font-weight: 900;
+        line-height: 1.5;
+    }
+}
+
+// scroll bar
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb {
+    background: $mainColor;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: $mainColor;
+}

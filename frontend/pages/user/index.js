@@ -36,7 +36,9 @@ const UserIndex = () => {
                                 </div>
                             </div>
                             <div className="uk-child-3-4@m">
-                                Content
+                                <div className="admin-content">
+                                    <h1 className="uk-text-uppercase" style={{ margin: '0', fontWeight: '900', letterSpacing: '2px' }}>User Area</h1>
+                                </div>
                             </div>
                         </div>
                     </div>
