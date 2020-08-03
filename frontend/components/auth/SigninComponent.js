@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faKey, faLongArrowAltRight, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import './Auth.scss';
 import { signin, authenticate, isAuth } from '../../actions/auth';
+import SigninWithGoogle from './GoogleSignin';
 
 const SigninComponent = ({ router }) => {
 
@@ -152,6 +153,15 @@ const SigninComponent = ({ router }) => {
                             </div>
                         </div>
                     </form>
+                    <hr />
+                    <div className="uk-child-width-1-2 uk-flex uk-flex-middle" data-uk-grid>
+                        <div className="or-use uk-text-left">
+                            <span className="uk-text-uppercase">OR use</span>
+                        </div>
+                        <div className="google-btn uk-text-right">
+                            <SigninWithGoogle />
+                        </div>
+                    </div>
                 </div>
             </div>
         )

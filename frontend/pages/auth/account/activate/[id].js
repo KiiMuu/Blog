@@ -34,8 +34,6 @@ const ActivateAccount = ({ router }) => {
         }
     }, [router]);
 
-    // const showLoading = () => loading ? (<span>Loading...</span>) : '';
-
     const handleSubmit = e => {
         e.preventDefault();
 
