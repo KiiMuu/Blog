@@ -47,4 +47,10 @@ router.put(
     authController.resetPassword
 );
 
+// google login
+router.post(
+    '/google-signin', 
+    authController.googleSignin
+);
+
 module.exports = router;
