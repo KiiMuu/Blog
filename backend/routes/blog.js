@@ -23,7 +23,7 @@ router.delete(
 );
 router.put(
     '/blog/:slug',
-    authController.requireSignIn, 
+    authController.requireSignIn,
     authController.adminMiddleware,  
     blogController.updateBlog
 );

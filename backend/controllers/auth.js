@@ -61,7 +61,7 @@ exports.preSignup = (req, res, next) => {
                 }
     
                 res.json({ 
-                    message: `Email has been sent to ${email}. Follow the instructions to reset your password. Link expires in 10-min.`
+                    message: `Email has been sent to ${email}. Follow the instructions to activate your account. Link expires in 10-min.`
                 });
             });
         });
