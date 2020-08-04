@@ -55,3 +55,30 @@
         @include linkHoverEffect;
     }
 }
+
+.uk-offcanvas-bar {
+    @include gradientBG;
+    .logo {
+        font-size: 20px;
+        text-decoration: none;
+        color: $darkColor;
+        font-weight: 900;
+        margin-top: 30px;
+        &:hover {
+            color: $darkColor !important;
+        }
+    }
+}
+
+.uk-nav-default {
+    li {
+        margin: 15px 0;
+        a {
+            color: $darkColor !important;
+            text-transform: uppercase;
+            &:hover {
+                color: $darkColor !important;
+            }
+        }
+    }
+}

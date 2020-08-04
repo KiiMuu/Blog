@@ -72,9 +72,48 @@ const Header = () => {
                                 <div id="offcanvas-overlay" data-uk-offcanvas="overlay: true">
                                     <div className="uk-offcanvas-bar">
                                         <button className="uk-offcanvas-close" type="button" data-uk-close></button>
-                                        <span>{APP_NAME}</span>
+                                        <a href="/" className="uk-navbar-item uk-logo uk-text-uppercase logo">{APP_NAME}</a>
                                         <ul className="uk-nav uk-nav-default">
-                                            <li><a href="#">Item</a></li>
+                                            <li className="navSearch">
+                                                <a title="Find Blogs?"><span><FontAwesomeIcon icon={faSearch} /></span></a>
+                                                <div data-uk-dropdown="mode: click; animation: uk-animation-slide-top-small">
+                                                    <div className="uk-nav uk-dropdown-nav">
+                                                        <Search />
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li className="navLink">
+                                                <a href="/blogs">Blogs</a>
+                                            </li>
+                                            <li className="navLink">
+                                                <a href="/user/crud/blog">Create a Blog</a>
+                                            </li>
+                                            {isAuth() && isAuth().role === 0 && (
+                                                <li className="navLink">
+                                                    <a href="/user">Dashboard</a>
+                                                </li>
+                                            )}
+                                            {isAuth() && isAuth().role === 1 && (
+                                                <li className="navLink">
+                                                    <a href="/admin">Dashboard</a>
+                                                </li>
+                                            )}
+                                            <li className="navLink">
+                                                <a href="/contact">Contact</a>
+                                            </li>
+                                            {!isAuth() && <Fragment>
+                                                <li className="navLink">
+                                                    <a href="/signup">SignUp</a>
+                                                </li>
+                                                <li className="navLink">
+                                                    <a href="/signin">SignIn</a>
+                                                </li>
+                                            </Fragment>}
+                                            {isAuth() && (
+                                                <li className="navLink">
+                                                    <a onClick={() => signout(() => {Router.replace('/signin')})}>SignOut</a>
+                                                </li>
+                                            )}
                                         </ul>
                                     </div>
                                 </div>
