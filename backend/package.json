@@ -1,10 +1,11 @@
-{
+ {
   "name": "backend",
   "version": "1.0.0",
   "description": "Seo Blog",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
