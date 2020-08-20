@@ -40,7 +40,7 @@ exports.preSignup = (req, res, next) => {
                 secure: true,
                 auth: {
                     user: `${process.env.EMAIL_TO}`,
-                    pass: "Karim604050@FCIHGMAIL"
+                    pass: `${process.env.EMAIL_PASS}`
                 }
             }));
     
