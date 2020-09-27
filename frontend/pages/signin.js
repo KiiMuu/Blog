@@ -1,11 +1,18 @@
+import { Fragment } from 'react';
+import Head from 'next/head';
 import Layout from '../components/layout/Layout';
 import SigninComponent from '../components/auth/SigninComponent';
 
 const SignIn = () => {
     return (
-        <Layout>
-            <SigninComponent />
-        </Layout>
+        <Fragment>
+            <Head>
+                <title>Bloggawy | SignIn</title>
+            </Head>
+            <Layout>
+                <SigninComponent />
+            </Layout>
+        </Fragment>
     )
 }
 
