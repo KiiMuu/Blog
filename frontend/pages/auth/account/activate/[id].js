@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useState, useEffect, Fragment } from 'react';
 import jwt from 'jsonwebtoken';
 import Layout from '../../../../components/layout/Layout';
@@ -64,19 +65,24 @@ const ActivateAccount = ({ router }) => {
     }
 
     return (
-        <Layout>
-            <div className="activation uk-margin-medium-top uk-text-center">
-                <div className="uk-container uk-container-small">
-                    <h3 className="uk-text-uppercase">Hey {name}, Activate your account</h3>
-                    {error && <p className="error-msg">{error} <span><FontAwesomeIcon icon={faExclamationCircle} /></span></p>}
-                    {success && <Fragment>
-                        <p className="success">You've successfully activated your account <span><FontAwesomeIcon icon={faCheckCircle} /></span></p>
-                        <p className="signin">You can now <a href="/signin">Signin</a></p>
-                    </Fragment>}
-                    {showButton && <button onClick={handleSubmit}>{buttonText}</button>}
+        <Fragment>
+            <Head>
+                <title>Bloggawy | Activate Account</title>
+            </Head>
+            <Layout>
+                <div className="activation uk-margin-medium-top uk-text-center">
+                    <div className="uk-container uk-container-small">
+                        <h3 className="uk-text-uppercase">Hey {name}, Activate your account</h3>
+                        {error && <p className="error-msg">{error} <span><FontAwesomeIcon icon={faExclamationCircle} /></span></p>}
+                        {success && <Fragment>
+                            <p className="success">You've successfully activated your account <span><FontAwesomeIcon icon={faCheckCircle} /></span></p>
+                            <p className="signin">You can now <a href="/signin">Signin</a></p>
+                        </Fragment>}
+                        {showButton && <button onClick={handleSubmit}>{buttonText}</button>}
+                    </div>
                 </div>
-            </div>
-        </Layout>
+            </Layout>
+        </Fragment>
     )
 }
 

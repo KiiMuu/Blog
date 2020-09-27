@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import Head from 'next/head';
+import { useState, Fragment } from 'react';
 import Layout from '../../../components/layout/Layout';
 import { forgotPassword } from '../../../actions/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -116,16 +117,21 @@ const ForgotPassword = () => {
     }
 
     return (
-        <Layout>
-            <div className="reset-pass uk-margin-medium-top">
-                <div className="uk-container uk-container-small">
-                    <h2 className="uk-text-uppercase uk-text-center">Forgot password</h2>
-                    {showError()}
-                    {showMessage()}
-                    {showForm && passwordForgotForm()}
+        <Fragment>
+            <Head>
+                <title>Bloggawy | Forgot Password</title>
+            </Head>
+            <Layout>
+                <div className="reset-pass uk-margin-medium-top">
+                    <div className="uk-container uk-container-small">
+                        <h2 className="uk-text-uppercase uk-text-center">Forgot password</h2>
+                        {showError()}
+                        {showMessage()}
+                        {showForm && passwordForgotForm()}
+                    </div>
                 </div>
-            </div>
-        </Layout>
+            </Layout>
+        </Fragment>
     )
 }
 

@@ -14,7 +14,7 @@ const Category = ({ category, blogs, query }) => {
 
     const head = () => (
         <Head>
-            <title>{category.name} | {APP_NAME}</title>
+            <title>{APP_NAME} | {category.name}</title>
             <meta 
                 name="description" 
                 content={`Best programming tuts on ${category.name}`} 
